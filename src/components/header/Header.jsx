@@ -8,9 +8,11 @@ export class Header extends Component {
     render() {
         return (
             <div className='header'>
-                <Navigation />
-                <Logo />
-                <Actions />
+                <div className='header__content'>
+                    <Navigation />
+                    <Logo />
+                    <Actions />
+                </div>
             </div>
         )
     }

@@ -4,7 +4,7 @@ import logo from "../../assets/logo.svg"
 export class Logo extends Component {
     render() {
         return (
-            <div>
+            <div className='header__logo'>
                 <img src={logo} alt="logo" />
             </div>
         )

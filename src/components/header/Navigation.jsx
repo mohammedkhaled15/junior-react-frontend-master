@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Query } from '@apollo/client/react/components';
 import { GET_CATEGORY_NAME } from "../../gql/Query"
+import { NavLink } from 'react-router-dom';
 
 
 export class Navigation extends Component {
@@ -12,9 +13,9 @@ export class Navigation extends Component {
                     if (loading || !data) return <h1>Loading...</h1>;
                     return <div className='navigation'>{data.categories.map((category, index) => {
                         return (
-                            <div key={index} className="navigation__category active">
+                            <NavLink key={index} to={`${category.name === "all" ? "/" : category.name.toLocaleLowerCase()}`} className={({ isActive }) => isActive ? "active link" : "link"}>
                                 <h2 >{category.name}</h2>
-                            </div>
+                            </NavLink>
                         )
                     })}</div>
                 }

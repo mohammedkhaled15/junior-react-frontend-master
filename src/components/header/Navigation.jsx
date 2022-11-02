@@ -1,0 +1,28 @@
+import React, { Component } from 'react'
+import { Query } from '@apollo/client/react/components';
+import { GET_CATEGORY_NAME } from "../../gql/Query"
+
+
+export class Navigation extends Component {
+    render() {
+        return (
+            <Query query={GET_CATEGORY_NAME}>{
+                ({ loading, error, data }) => {
+                    if (error) return <h1>Error...</h1>;
+                    if (loading || !data) return <h1>Loading...</h1>;
+                    return <div className='navigation'>{data.categories.map((category, index) => {
+                        return (
+                            <h2 index={index} className="navigation__category">{category.name}</h2>
+                        )
+                    })}</div>
+                }
+            }</ Query>
+        )
+    }
+}
+
+export default Navigation
+
+// function UseQuery(props) {
+//     return props.children(useQuery(props.key, props.fn, props.options))
+// }

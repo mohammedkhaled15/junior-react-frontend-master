@@ -1,20 +1,12 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import Header from "./components/header/Header.jsx";
 
 function App() {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:4000/");
-      const data = await response.json;
-      setData(data);
-      setIsLoading(false);
-    }
-  }, []);
-  console.log(isLoading, data);
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Header />
+    </div>
+  );
 }
 
 export default App;

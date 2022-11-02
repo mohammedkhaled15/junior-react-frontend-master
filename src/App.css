@@ -2,19 +2,43 @@
   position: absolute;
   height: 80px;
   width: 100vw;
-  background-color: rgb(182, 167, 167);
+  background-color: #fff;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 .navigation {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
 }
 
 .navigation__category {
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  position: relative;
+}
+.navigation__category::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #5ece7b;
+  left: 0;
+  top: 250%;
+  transition: 0.2s all;
+}
+.navigation__category:hover::after {
+  width: 100%;
+}
+
+.navigation__actions__currency {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  align-items: center;
 }

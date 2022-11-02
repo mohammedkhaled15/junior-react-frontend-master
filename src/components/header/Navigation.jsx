@@ -12,7 +12,9 @@ export class Navigation extends Component {
                     if (loading || !data) return <h1>Loading...</h1>;
                     return <div className='navigation'>{data.categories.map((category, index) => {
                         return (
-                            <h2 index={index} className="navigation__category">{category.name}</h2>
+                            <div key={index} className="navigation__category active">
+                                <h2 >{category.name}</h2>
+                            </div>
                         )
                     })}</div>
                 }

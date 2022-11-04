@@ -8,8 +8,17 @@ export class App extends Component {
   state = {
     currency: "USD",
     currencySymbol: "$",
+    currencyModal: false,
   };
 
+  showCurrencyModal = () => {
+    this.setState({ currencyModal: !this.state.currencyModal });
+  };
+
+  hideCurrencyModal = (e) => {
+    this.setState({ currencyModal: false });
+    e.stopPropagation();
+  };
   changeCurrency = (currency, symbol) => {
     const newState = { ...this.state };
     newState.currency = currency;
@@ -21,9 +30,12 @@ export class App extends Component {
       <BrowserRouter>
         <CurrencyProvider
           value={{
-            changeCurrency: this.changeCurrency,
             currency: this.state.currency,
             currencySymbol: this.state.currencySymbol,
+            currencyModal: this.state.currencyModal,
+            changeCurrency: this.changeCurrency,
+            showCurrencyModal: this.showCurrencyModal,
+            hideCurrencyModal: this.hideCurrencyModal,
           }}
         >
           <CustomRoutes />

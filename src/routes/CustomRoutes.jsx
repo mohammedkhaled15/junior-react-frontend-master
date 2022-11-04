@@ -9,7 +9,7 @@ export class CustomRoutes extends Component {
     render() {
         return (
             <CurrencyConsumer>
-                {({ changeCurrency, currency }) => {
+                {({ currency, ...rest }) => {
                     return (
                         <Routes>
                             <Route path="/" element={<SharedLayout />} >

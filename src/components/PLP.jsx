@@ -41,7 +41,7 @@ export class PLP extends Component {
                                                 </div>
                                                 <span style={{ color: "black", fontWeight: "500" }}>{symbol} {price}</span>
                                             </div>
-                                            {!product.inStock && <div div className='PLP__content__card__overlay'>Out Of Stock</div>}
+                                            {!product.inStock && <div className='PLP__content__card__overlay'>Out Of Stock</div>}
                                         </div>
                                     )
                                 })

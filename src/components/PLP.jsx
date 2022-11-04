@@ -8,7 +8,7 @@ export class PLP extends Component {
     render() {
 
         const currency = this.props.currency
-
+        // console.log(this.props.currency)
         return (
             <div className='PLP'>
                 < h1 className='PLP__title'> {this.props.category}</h1 >
@@ -35,7 +35,10 @@ export class PLP extends Component {
                                         <div key={product.id} className='PLP__content__card'>
                                             <img src={product.gallery[0]} alt="product" />
                                             <div className='PLP__content__card__desc'>
-                                                <span >{product.name}</span>
+                                                <div style={{ width: "100%", display: "flex", justifyContent: "space-around" }}>
+                                                    <span>{product.name}</span>
+                                                    <span>{product.brand}</span>
+                                                </div>
                                                 <span style={{ color: "black", fontWeight: "500" }}>{symbol} {price}</span>
                                             </div>
                                             {!product.inStock && <div div className='PLP__content__card__overlay'>Out Of Stock</div>}

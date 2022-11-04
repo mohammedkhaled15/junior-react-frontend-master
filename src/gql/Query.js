@@ -41,3 +41,12 @@ export function GET_PRODUCTS_FOR_CATEGORY(category) {
     }
   }`;
 }
+
+export const GET_CURRENCY_DATA = gql`
+  query getCurrencyData {
+    currencies {
+      label
+      symbol
+    }
+  }
+`;

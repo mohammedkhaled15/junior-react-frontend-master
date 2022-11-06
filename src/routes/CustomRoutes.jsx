@@ -8,7 +8,7 @@ import SharedLayout from "../components/SharedLayout";
 //context
 import { AppConsumer } from "../components/context/appContext";
 //queries
-import { GET_CATEGORY_NAME } from "../gql/Query"
+import { GET_CATEGORY_NAME, GET_PRODUCTS_FOR_CATEGORY } from "../gql/Query"
 import PDP from "../components/pdp/PDP";
 import React from "react";
 
@@ -34,7 +34,18 @@ export class CustomRoutes extends Component {
                                 <React.Fragment key={category.name}>
                                   <Route key={category.name} path={`${category.name}`} element={<PLP category={category.name} currency={currency} />} >
                                   </Route>
-                                  <Route path={`${category.name}/:productId`} element={<PDP />} />
+                                  {/* <Query query={GET_PRODUCTS_FOR_CATEGORY(category.name)}>
+                                    {
+                                      ({ loading, error, data }) => {
+                                        if (error) return "";
+                                        if (loading || !data) return "";
+                                        console.log(data)
+                                        return ( */}
+                                  <Route path={`:categoryName/:productId`} element={<PDP />} />
+                                  {/* )
+                                      }
+                                    }
+                                  </Query> */}
                                 </React.Fragment>
                               )
                             })

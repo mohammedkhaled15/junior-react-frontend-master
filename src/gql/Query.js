@@ -4,6 +4,7 @@ export const GET_CATEGORY_NAME = gql`
   query getCategoryName {
     categories {
       name
+      products
     }
   }
 `;
@@ -50,3 +51,35 @@ export const GET_CURRENCY_DATA = gql`
     }
   }
 `;
+
+export function GET_PRODUCT_DETAILS(productId) {
+  return gql`
+  query GetProductsForCategory {
+    product(id:"${productId}"){
+      id
+    name
+    inStock
+    gallery
+    description
+    category
+    attributes{
+      id
+      name
+      type
+      items{
+        displayValue
+        value
+        id
+      }
+    }
+    prices{
+      currency{
+        label
+        symbol
+      }
+      amount
+    }
+    brand
+    }
+  }`;
+}

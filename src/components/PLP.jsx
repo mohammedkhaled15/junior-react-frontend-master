@@ -1,6 +1,7 @@
-//libraries
+//libraries components
 import React, { Component } from 'react'
 import { Query } from '@apollo/client/react/components'
+import { Link } from 'react-router-dom'
 //queries
 import { GET_PRODUCTS_FOR_CATEGORY } from "../gql/Query"
 import { Outlet } from 'react-router-dom'
@@ -17,8 +18,8 @@ export class PLP extends Component {
             <Query query={GET_PRODUCTS_FOR_CATEGORY(this.props.category)}>
               { //Query component to fetch graphql data
                 ({ loading, error, data }) => {
-                  if (error) return <h1>Error...</h1>;
-                  if (loading || !data) return <h1>Loading...</h1>;
+                  if (error) return "";
+                  if (loading || !data) return "";
                   return (
                     data.category.products.map((product) => {
                       //function to extract the price depending on product and choosen currency
@@ -32,8 +33,9 @@ export class PLP extends Component {
                       }
                       //simply distructur object
                       const { symbol, price } = getPriceForCurrency(currency)
+                      // console.log(this.props.category)
                       return (
-                        <div key={product.id} className='PLP__content__card'>
+                        <Link key={product.id} to={`${product.id}`} className='PLP__content__card'>
                           <img src={product.gallery[0]} alt="product" />
                           <div className='PLP__content__card__desc'>
                             <div style={{ width: "100%", display: "flex", justifyContent: "space-around" }}>
@@ -44,7 +46,7 @@ export class PLP extends Component {
                           </div>
                           {/* Adding overlay depending on inStock value */}
                           {!product.inStock && <div className='PLP__content__card__overlay'>Out Of Stock</div>}
-                        </div>
+                        </Link>
                       )
                     })
 

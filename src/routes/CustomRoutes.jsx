@@ -9,6 +9,8 @@ import SharedLayout from "../components/SharedLayout";
 import { AppConsumer } from "../components/context/appContext";
 //queries
 import { GET_CATEGORY_NAME } from "../gql/Query"
+import PDP from "../components/pdp/PDP";
+import React from "react";
 
 export class CustomRoutes extends Component {
 
@@ -23,20 +25,24 @@ export class CustomRoutes extends Component {
                   if (error) return "";
                   if (loading || !data) return "";
                   return (
-                    <Routes>
-                      <Route path="/" element={<SharedLayout />} >
-                        <>
+                    <>
+                      <Routes>
+                        <Route path="/" element={<SharedLayout />} >
                           {
-                            data.categories.map((category, index) => {
+                            data.categories.map((category) => {
                               return (
-                                <Route key={category.name} index={category.name === "all"} path={`${category.name === "all" ? "" : "/" + category.name}`} element={<PLP category={category.name} currency={currency} />} />
+                                <React.Fragment key={category.name}>
+                                  <Route key={category.name} path={`${category.name}`} element={<PLP category={category.name} currency={currency} />} >
+                                  </Route>
+                                  <Route path={`${category.name}/:productId`} element={<PDP />} />
+                                </React.Fragment>
                               )
                             })
                           }
-                        </>
-                        <Route path="/*" element={<h1>404 Error</h1>} />
-                      </Route>
-                    </Routes>
+                          <Route path="/*" element={<h1 style={{ fontSize: "200px", marginTop: "200px" }}>404 Error</h1>} />
+                        </Route>
+                      </Routes>
+                    </>
                   )
                 }
               }

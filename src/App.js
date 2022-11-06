@@ -29,6 +29,7 @@ export class App extends Component {
     newState.currencySymbol = symbol;
     this.setState(newState);
   };
+
   render() {
     return (
       <BrowserRouter>

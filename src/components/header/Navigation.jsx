@@ -14,9 +14,9 @@ export class Navigation extends Component {
                     ({ loading, error, data }) => {
                         if (error) return <h1>Error...</h1>;
                         if (loading || !data) return <h1>Loading...</h1>;
-                        return <div className='navigation'>{data.categories.map((category, index) => {
+                        return <div className='navigation'>{data.categories.map((category) => {
                             return (
-                                <NavLink key={index} to={`${category.name === "all" ? "/" : category.name.toLocaleLowerCase()}`} className={({ isActive }) => isActive ? "active link" : "link"}>
+                                <NavLink key={category.name} to={`${category.name.toLocaleLowerCase()}`} className={({ isActive }) => isActive ? "active link" : "link"}>
                                     <h2 >{category.name}</h2>
                                 </NavLink>
                             )

@@ -1,25 +1,28 @@
+//libraries
 import React, { Component } from 'react'
 import { Outlet } from 'react-router-dom'
-import Header from './header/Header'
+//conntext
 import { AppConsumer } from './context/appContext'
+//component
+import Header from './header/Header'
 
 export class SharedLayout extends Component {
-    render() {
-        return (
-            <AppConsumer>
-                {
-                    ({ currency, currencySymbol, currencyModal, changeCurrency, showCurrencyModal, hideCurrencyModal }) => {
-                        return (
-                            <div onClick={currencyModal ? hideCurrencyModal : null}>
-                                <Header />
-                                <Outlet />
-                            </div>
-                        )
-                    }
-                }
-            </AppConsumer>
-        )
-    }
+  render() {
+    return (
+      <AppConsumer>
+        {
+          (value) => {
+            return (
+              <div onClick={value.currencyModal ? value.hideCurrencyModal : null}>
+                <Header />
+                <Outlet />
+              </div>
+            )
+          }
+        }
+      </AppConsumer>
+    )
+  }
 }
 
 export default SharedLayout

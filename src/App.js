@@ -1,7 +1,11 @@
+//libraries components
 import { Component } from "react";
-import "./App.css";
 import { BrowserRouter } from "react-router-dom";
+//css file
+import "./App.css";
+//custom components
 import CustomRoutes from "./routes/CustomRoutes";
+//context
 import { AppProvider } from "./components/context/appContext";
 
 export class App extends Component {

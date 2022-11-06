@@ -8,7 +8,7 @@ export class PLP extends Component {
     render() {
 
         const currency = this.props.currency
-        // console.log(this.props.currency)
+        // console.log(this.props.category)
         return (
             <div className='PLP'>
                 < h1 className='PLP__title'> {this.props.category}</h1 >

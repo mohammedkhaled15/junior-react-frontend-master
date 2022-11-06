@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './header/Header'
-import { CurrencyConsumer } from './context/currencyContext'
+import { AppConsumer } from './context/appContext'
 
 export class SharedLayout extends Component {
     render() {
         return (
-            <CurrencyConsumer>
+            <AppConsumer>
                 {
                     ({ currency, currencySymbol, currencyModal, changeCurrency, showCurrencyModal, hideCurrencyModal }) => {
                         return (
@@ -17,7 +17,7 @@ export class SharedLayout extends Component {
                         )
                     }
                 }
-            </CurrencyConsumer>
+            </AppConsumer>
         )
     }
 }

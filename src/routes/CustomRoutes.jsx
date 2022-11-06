@@ -2,26 +2,48 @@ import { Component } from "react";
 import { Route, Routes } from "react-router-dom"
 import PLP from "../components/PLP";
 import SharedLayout from "../components/SharedLayout";
-import { CurrencyConsumer } from "../components/context/currencyContext";
+import { AppConsumer } from "../components/context/appContext";
+import { Query } from '@apollo/client/react/components';
+import { GET_CATEGORY_NAME } from "../gql/Query"
 
 export class CustomRoutes extends Component {
 
     render() {
         return (
-            <CurrencyConsumer>
+            <AppConsumer>
                 {({ currency, ...rest }) => {
                     return (
-                        <Routes>
-                            <Route path="/" element={<SharedLayout />} >
-                                <Route index element={<PLP category={"all"} currency={currency} />} />
-                                <Route path="/clothes" element={<PLP category={"clothes"} currency={currency} />} />
-                                <Route path="/tech" element={<PLP category={"tech"} currency={currency} />} />
-                                <Route path="/*" element={<h1>404 Error</h1>} />
-                            </Route>
-                        </Routes>
+                        <Query query={GET_CATEGORY_NAME}>
+                            {
+                                ({ loading, error, data }) => {
+                                    if (error) return "";
+                                    if (loading || !data) return "";
+                                    return (
+                                        <Routes>
+                                            <Route path="/" element={<SharedLayout />} >
+                                                <>
+                                                    {
+                                                        data.categories.map((category, index) => {
+                                                            return (
+                                                                data.categories.map((category) => {
+                                                                    return (
+                                                                        <Route key={category.name} index={category.name === "all"} path={`${category.name === "all" ? "" : "/" + category.name}`} element={<PLP category={category.name} currency={currency} />} />
+                                                                    )
+                                                                })
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                                <Route path="/*" element={<h1>404 Error</h1>} />
+                                            </Route>
+                                        </Routes>
+                                    )
+                                }
+                            }
+                        </Query>
                     )
                 }}
-            </CurrencyConsumer>
+            </AppConsumer>
         )
     }
 }

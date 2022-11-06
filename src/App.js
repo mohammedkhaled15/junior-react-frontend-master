@@ -2,7 +2,7 @@ import { Component } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import CustomRoutes from "./routes/CustomRoutes";
-import { CurrencyProvider } from "./components/context/currencyContext";
+import { AppProvider } from "./components/context/appContext";
 
 export class App extends Component {
   state = {
@@ -28,7 +28,7 @@ export class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <CurrencyProvider
+        <AppProvider
           value={{
             currency: this.state.currency,
             currencySymbol: this.state.currencySymbol,
@@ -39,7 +39,7 @@ export class App extends Component {
           }}
         >
           <CustomRoutes />
-        </CurrencyProvider>
+        </AppProvider>
       </BrowserRouter>
     );
   }

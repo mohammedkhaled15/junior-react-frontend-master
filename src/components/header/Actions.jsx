@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import downArrow from "../../assets/downArrow.svg"
 import cart from "../../assets/cart.svg"
-import { CurrencyConsumer } from '../context/currencyContext'
+import { AppConsumer } from '../context/appContext'
 import { Query } from '@apollo/client/react/components'
 import { GET_CURRENCY_DATA } from '../../gql/Query'
 
@@ -10,7 +10,7 @@ export class Actions extends Component {
 
     render() {
         return (
-            <CurrencyConsumer>
+            <AppConsumer>
                 {({ currency, currencySymbol, currencyModal, changeCurrency, showCurrencyModal, hideCurrencyModal }) => {
                     return (
                         <div className='navigation__actions'>
@@ -50,7 +50,7 @@ export class Actions extends Component {
                         </div >
                     )
                 }}
-            </CurrencyConsumer>
+            </AppConsumer>
         )
     }
 }

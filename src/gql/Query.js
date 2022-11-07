@@ -4,7 +4,10 @@ export const GET_CATEGORY_NAME = gql`
   query getCategoryName {
     categories {
       name
-      products
+      products {
+        name
+        id
+      }
     }
   }
 `;

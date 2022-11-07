@@ -5,8 +5,30 @@ export const GET_CATEGORY_NAME = gql`
     categories {
       name
       products {
-        name
         id
+        name
+        inStock
+        gallery
+        description
+        category
+        attributes {
+          id
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
+        }
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
+        }
+        brand
       }
     }
   }

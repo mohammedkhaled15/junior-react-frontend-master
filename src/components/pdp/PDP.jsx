@@ -33,11 +33,14 @@ class PDP extends Component {
                       )
                     })}
                   </aside>
-                  {/* <main>
+                  <main className='PDP__main'>
                     <div className='PDP__hero-image'>
                       <img src={data.product.gallery[0]} alt="main-view" />
                     </div>
-                  </main> */}
+                    <div className='PDP__main__details'>
+
+                    </div>
+                  </main>
                 </>
               )
             }

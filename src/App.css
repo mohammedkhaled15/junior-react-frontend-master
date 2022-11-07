@@ -174,7 +174,7 @@
   width: 80%;
   margin-inline: auto;
   margin-top: 80px;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #eeeeee;
   display: flex;
   flex-direction: row;
@@ -188,8 +188,6 @@
   align-items: center;
   gap: 40px;
   overflow-y: scroll;
-  /* padding-top: 1rem;
-  padding-bottom: 1rem; */
   padding: 1rem;
 }
 .PDP__aside::-webkit-scrollbar {
@@ -201,9 +199,16 @@
 .PDP__aside__img-container img {
   max-width: 100px;
 }
-.PDP__hero-image {
-  width: 600px;
+.PDP__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
-/* .PDP__hero-image img {
-  max-width: 100%;
-} */
+.PDP__hero-image {
+  max-width: 600px;
+  max-height: 600px;
+}
+.PDP__hero-image img {
+  height: 600px;
+}

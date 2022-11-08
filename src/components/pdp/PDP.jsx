@@ -78,7 +78,7 @@ class PDP extends Component {
                                 <div className='attr__items'>
                                   {attr.items.map(value => {
                                     return (
-                                      attr.type !== "swatch" ? <span key={value.id} className='attr__value'>{value.displayValue}</span> : <div key={value.id} style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}></div>
+                                      attr.type !== "swatch" ? <span key={value.id} className='attr__value'>{value.displayValue}</span> : <div key={value.id} className="attr__value attr__value-color" style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}></div>
                                     )
                                   })}
                                 </div>
@@ -87,7 +87,7 @@ class PDP extends Component {
                           })
                         }
                         <h5 className='attr__title'>PRICE:</h5>
-                        <h3>{this.state.priceObject[0].currency.symbol} {this.state.priceObject[0].amount}</h3>
+                        <h3 className='attr__price'>{this.state.priceObject[0].currency.symbol}{this.state.priceObject[0].amount}</h3>
                         <button className='add-to-cart'>ADD to Cart</button>
                         <div className='description'>{parse(this.state.productObject.description)}</div>
                       </div>

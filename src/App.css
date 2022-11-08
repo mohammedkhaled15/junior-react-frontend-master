@@ -174,7 +174,7 @@
   width: 80%;
   margin-inline: auto;
   margin-top: 80px;
-  /* height: 100vh; */
+  height: 100vh;
   background-color: #eeeeee;
   display: flex;
   flex-direction: row;
@@ -200,15 +200,62 @@
   max-width: 100px;
 }
 .PDP__main {
+  flex: 1;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
+  gap: 1rem;
 }
 .PDP__hero-image {
   max-width: 600px;
   max-height: 600px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 .PDP__hero-image img {
   height: 600px;
+}
+.PDP__main__details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.6rem;
+}
+.PDP__main__details .brand {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: rgba(29, 31, 34, 1);
+  margin-bottom: 16px;
+}
+.PDP__main__details .name {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  color: rgba(29, 31, 34, 1);
+  margin-bottom: 40px;
+}
+.PDP__main__details .attrs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.attr__title {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 0.5rem;
+}
+.attr__items {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }

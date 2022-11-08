@@ -24,7 +24,7 @@ export class CustomRoutes extends Component {
                 ({ loading, error, data }) => {
                   if (error) return "";
                   if (loading || !data) return "";
-                  console.log(data.categories)
+                  // console.log(data.categories)
                   return (
                     <Routes>
                       <Route path="/" element={<SharedLayout />} >
@@ -34,7 +34,7 @@ export class CustomRoutes extends Component {
                               <React.Fragment key={category.name}>
                                 <Route key={category.name} path={`${category.name}`} element={<PLP category={category.name} currency={currency} />} >
                                 </Route>
-                                <Route path={`:categoryName/:productId`} element={<PDP categories={data.categories} />} />
+                                <Route path={`:categoryName/:productId`} element={<PDP categories={data.categories} currency={currency} />} />
                               </React.Fragment>
                             )
                           })

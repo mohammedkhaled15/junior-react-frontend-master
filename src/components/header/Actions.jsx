@@ -25,7 +25,7 @@ export class Actions extends Component {
                                             if (error) return "";
                                             if (loading || !data) return "";
                                             return (
-                                                <ul className='navigation__actions__currency__list' style={currencyModal ? { opacity: "100%" } : { opacity: "0" }}>
+                                                <ul className='navigation__actions__currency__list' style={currencyModal ? { opacity: "100%", display: "block" } : { opacity: "0", display: "none" }}>
                                                     {
                                                         data.currencies.map((curr, index) => {
                                                             return (

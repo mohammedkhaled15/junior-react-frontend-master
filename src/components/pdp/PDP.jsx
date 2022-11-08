@@ -1,6 +1,7 @@
 //libraries
 import React, { Component } from 'react'
 import { Query } from '@apollo/client/react/components'
+import parse from 'html-react-parser';
 //import withRouter Hoc
 import withRouter from '../HOC/withRouter'
 //import queries
@@ -14,7 +15,7 @@ class PDP extends Component {
     productId: "",
     productObject: {},
     heroImg: "",
-    currency: this.props.currency,
+    currency: null,
     priceObject: {}
   }
 
@@ -22,17 +23,27 @@ class PDP extends Component {
     //get some data from params
     const { categoryName, productId } = this.props.params
     //declaring the choosen product
-    const productObject = this.props.categories.filter(category => category.name === categoryName)[0].products.filter(product => product.id === productId)[0]
+    let productObject = this.props.categories.filter(category => category.name === categoryName)[0].products.filter(product => product.id === productId)[0]
     //declaring the default hero image
     const imgUrl = productObject.gallery[0]
-    const priceObject = productObject.prices.filter(price => price.currency.label === this.state.currency)
-    //setting the state wih the new value
-    this.setState({ categoryName, productId, productObject, heroImg: imgUrl, priceObject })
+    //determine the price object depending on choosen currency
+    let priceObject = productObject.prices.filter(price => price.currency.label === this.props.currency)
+    //setting currrency = to props currency
+    let currency = this.props.currency
+    //setting the state wih the new values
+    this.setState({ categoryName, productId, productObject, heroImg: imgUrl, currency, priceObject })
   }
 
+  componentDidUpdate(prevProps) {
+    // changing currency state if currency props changed
+    if (prevProps.currency !== this.props.currency) {
+      let priceObject = this.state.productObject.prices.filter(price => price.currency.label === this.props.currency)
+      this.setState({ currency: this.props.currency, priceObject })
+    }
+  }
 
   render() {
-    // console.log(this.state)
+    console.log(this.state.currency)
     return (
       <section className='PDP'>
         <Query query={GET_PRODUCT_DETAILS(this.state.productId)}>
@@ -67,7 +78,7 @@ class PDP extends Component {
                                 <div className='attr__items'>
                                   {attr.items.map(value => {
                                     return (
-                                      attr.type !== "swatch" ? <span key={value.id} className='attr__value'>{value.displayValue}</span> : <div key={value.id} className='attr__value' style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}></div>
+                                      attr.type !== "swatch" ? <span key={value.id} className='attr__value'>{value.displayValue}</span> : <div key={value.id} style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}></div>
                                     )
                                   })}
                                 </div>
@@ -76,7 +87,9 @@ class PDP extends Component {
                           })
                         }
                         <h5 className='attr__title'>PRICE:</h5>
-                        <h3>{this.state.currency} {this.state.priceObject[0].amount}</h3>
+                        <h3>{this.state.priceObject[0].currency.symbol} {this.state.priceObject[0].amount}</h3>
+                        <button className='add-to-cart'>ADD to Cart</button>
+                        <div className='description'>{parse(this.state.productObject.description)}</div>
                       </div>
                     </div>
                   </main>

@@ -1,6 +1,6 @@
 //libraries components
 import { Component } from "react";
-import { BrowserRouter, json } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 //css file
 import "./App.css";
 //custom components
@@ -13,17 +13,14 @@ export class App extends Component {
     currency: "USD",
     currencySymbol: "$",
     currencyModal: false,
+    productExist: { index: 0, flag: false },
     predictedProduct: {},
     shoopingCart: [],
   };
 
   componentDidUpdate() {
-    // console.log(this.state.predictedProduct);
+    console.log(this.state.productExist.flag);
     console.log(this.state.shoopingCart);
-    // console.log(
-    //   json.toString(this.state.shoopingCart[0]) ===
-    //     json.toString(this.state.shoopingCart[1])
-    // );
   }
 
   showCurrencyModal = () => {
@@ -42,46 +39,51 @@ export class App extends Component {
   };
 
   settingNewPredictedProduct = (productId) => {
-    let newObj = new Object();
+    let newObj = {};
     newObj.id = productId;
     newObj.count = 1;
     this.setState({ predictedProduct: newObj });
   };
 
   addAttrToProduct = (attrName, value) => {
-    let newObj = this.state.predictedProduct;
+    let newObj = { ...this.state.predictedProduct };
     newObj[`${attrName}`] = value;
-    let newObjSorted = Object.keys(newObj)
-      .sort()
-      .reduce((acc, key) => ({ ...acc, [key]: newObj[key] }), {});
-    this.setState({ ...this.state, predictedProduct: newObjSorted });
+    // let newObjSorted = Object.keys(newObj)
+    //   .sort()
+    //   .reduce((acc, key) => ({ ...acc, [key]: newObj[key] }), {});
+    this.setState({ predictedProduct: newObj });
+    this.checkProductExistance();
   };
 
-  addToCart = (predictedProduct) => {
-    let newObj = [...this.state.shoopingCart];
-    let productExist = { index: 0, flag: false };
-    // newObj.map((product, index) => {
-    //   console.log("true");
-    //   if (product.id === predictedProduct.id) {
-    //     productExist = Object.keys(product)
-    //       .filter((key) => key !== "id" && key !== "count")
-    //       .map((attr) => {
-    //         if (!product[attr] === predictedProduct[attr]) {
-    //           productExist.flag = false;
-    //         }
-    //       });
-    //   } else {
-    //     productExist.index = false;
-    //   }
-    // });
+  checkProductExistance = () => {
+    let newShoppingCart = [...this.state.shoopingCart];
+    newShoppingCart.map((product, index) => {
+      if (product.id === this.state.predictedProduct.id) {
+        let value = Object.keys(product)
+          .filter((key) => key !== "id" && key !== "count")
+          .every((attr) => product[attr] === this.state.predictedProduct[attr]);
+        if (value) {
+          return this.setState({ productExist: { index, flag: true } });
+        } else {
+          this.setState({ productExist: { flag: false } });
+        }
+      } else {
+        this.setState({ productExist: { flag: false } });
+      }
+    });
+  };
 
-    if (!productExist.flag) {
+  addToCart = () => {
+    let newObj = [...this.state.shoopingCart];
+    if (!this.state.productExist.flag) {
       newObj.push(this.state.predictedProduct);
+      this.setState({ productExist: { index: newObj.length - 1, flag: true } });
     } else {
-      newObj[productExist.index].count++;
+      newObj[this.state.productExist.index].count++;
     }
     this.setState({ shoopingCart: newObj });
   };
+
   render() {
     return (
       <BrowserRouter>

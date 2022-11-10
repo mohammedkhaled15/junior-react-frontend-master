@@ -56,8 +56,8 @@ class PDP extends Component {
                   <aside className='PDP__aside'>
                     {data.product.gallery.map(image => {
                       return (
-                        <div key={image} className='PDP__aside__img-container'>
-                          <img src={image} alt="Detailed-pic" />
+                        <div key={image} onClick={() => this.setState({ ...this.state, heroImg: image })} className={`${this.state.heroImg === image ? "active-pic" : null} PDP__aside__img-container`}>
+                          <img src={image} alt="Detailed-pic" className={`${this.state.heroImg === image ? "active-pic" : null}`} />
                         </div>
                       )
                     })}

@@ -6,6 +6,7 @@ import parse from 'html-react-parser';
 import withRouter from '../HOC/withRouter'
 //import queries
 import { GET_PRODUCT_DETAILS } from '../../gql/Query'
+import { AppConsumer } from '../context/appContext';
 
 
 class PDP extends Component {
@@ -32,6 +33,10 @@ class PDP extends Component {
     let currency = this.props.currency
     //setting the state wih the new values
     this.setState({ categoryName, productId, productObject, heroImg: imgUrl, currency, priceObject })
+
+    // resetting predicted product to the new one with new id
+    // console.log(this.props.predictedProduct)
+    this.props.settingNewPredictedProduct(this.props.params.productId)
   }
 
   componentDidUpdate(prevProps) {
@@ -43,62 +48,87 @@ class PDP extends Component {
   }
 
   render() {
-    console.log(this.state.currency)
     return (
-      <section className='PDP'>
-        <Query query={GET_PRODUCT_DETAILS(this.state.productId)}>
-          {
-            ({ loading, error, data }) => {
-              if (error) return "";
-              if (loading || !data) return "";
-              return (
-                <>
-                  <aside className='PDP__aside'>
-                    {data.product.gallery.map(image => {
+      <AppConsumer>
+        {
+          ({ addAttrToProduct, predictedProduct, addToCart, ...rest }) => {
+            return (
+              <section className='PDP'>
+                <Query query={GET_PRODUCT_DETAILS(this.state.productId)}>
+                  {
+                    ({ loading, error, data }) => {
+                      if (error) return "";
+                      if (loading || !data) return "";
                       return (
-                        <div key={image} onClick={() => this.setState({ ...this.state, heroImg: image })} className={`${this.state.heroImg === image ? "active-pic" : null} PDP__aside__img-container`}>
-                          <img src={image} alt="Detailed-pic" className={`${this.state.heroImg === image ? "active-pic" : null}`} />
-                        </div>
-                      )
-                    })}
-                  </aside>
-                  <main className='PDP__main'>
-                    <div className='PDP__hero-image'>
-                      <img src={this.state.heroImg} alt="main-view" />
-                    </div>
-                    <div className='PDP__main__details'>
-                      <h2 className='brand'>{this.state.productObject.brand}</h2>
-                      <h2 className='name'>{this.state.productObject.name}</h2>
-                      <div className='attrs'>
-                        {
-                          this.state.productObject.attributes?.map(attr => {
-                            return (
-                              <div className='attr-content' key={attr.id}>
-                                <h5 className='attr__title'>{attr.name}:</h5>
-                                <div className='attr__items'>
-                                  {attr.items.map(value => {
-                                    return (
-                                      attr.type !== "swatch" ? <span key={value.id} className='attr__value'>{value.displayValue}</span> : <div key={value.id} className="attr__value attr__value-color" style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}></div>
-                                    )
-                                  })}
+                        <>
+                          <aside className='PDP__aside'>
+                            {data.product.gallery.map(image => {
+                              return (
+                                <div
+                                  key={image}
+                                  onClick={() => this.setState({ ...this.state, heroImg: image })}
+                                  className={`${this.state.heroImg === image ? "active-pic" : null} PDP__aside__img-container`}>
+                                  <img
+                                    src={image} alt="Detailed-pic" className={`${this.state.heroImg === image ? "active-pic" : null}`} />
                                 </div>
+                              )
+                            })}
+                          </aside>
+                          <main className='PDP__main'>
+                            <div className='PDP__hero-image'>
+                              <img src={this.state.heroImg} alt="main-view" />
+                            </div>
+                            <div className='PDP__main__details'>
+                              <h2 className='brand'>{this.state.productObject.brand}</h2>
+                              <h2 className='name'>{this.state.productObject.name}</h2>
+                              <div className='attrs'>
+                                {
+                                  this.state.productObject.attributes?.map(attr => {
+                                    return (
+                                      <div className='attr-content' key={attr.id}>
+                                        <h5 className='attr__title'>{attr.name}:</h5>
+                                        <div className='attr__items'>
+                                          {attr.items.map(value => {
+                                            return (
+                                              attr.type !== "swatch" ?
+                                                <span key={value.id}
+                                                  onClick={() => { addAttrToProduct(attr.name, value.displayValue, this.state.productId) }}
+                                                  className={predictedProduct[`${attr.name}`] === value.displayValue ? "active attr__value" : "attr__value"}>
+                                                  {value.displayValue}
+                                                </span> :
+                                                <div key={value.id}
+                                                  onClick={() => { addAttrToProduct(attr.name, value.displayValue, this.state.productId) }}
+                                                  className={predictedProduct[`${attr.name}`] === value.displayValue ? "active attr__value attr__value-color" : "attr__value attr__value-color"}
+                                                  style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}>
+                                                </div>
+                                            )
+                                          })}
+                                        </div>
+                                      </div>
+                                    )
+                                  })
+                                }
+                                <h5 className='attr__title'>PRICE:</h5>
+                                <h3 className='attr__price'>
+                                  {this.state.priceObject[0].currency.symbol}{this.state.priceObject[0].amount}
+                                </h3>
+                                <button
+                                  onClick={() => addToCart(predictedProduct)}
+                                  className='add-to-cart'>ADD to Cart</button>
+                                <div className='description'>{parse(this.state.productObject.description)}</div>
                               </div>
-                            )
-                          })
-                        }
-                        <h5 className='attr__title'>PRICE:</h5>
-                        <h3 className='attr__price'>{this.state.priceObject[0].currency.symbol}{this.state.priceObject[0].amount}</h3>
-                        <button className='add-to-cart'>ADD to Cart</button>
-                        <div className='description'>{parse(this.state.productObject.description)}</div>
-                      </div>
-                    </div>
-                  </main>
-                </>
-              )
-            }
+                            </div>
+                          </main>
+                        </>
+                      )
+                    }
+                  }
+                </Query>
+              </section>
+            )
           }
-        </Query>
-      </section>
+        }
+      </AppConsumer>
     )
   }
 }

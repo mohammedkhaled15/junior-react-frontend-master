@@ -17,7 +17,7 @@ export class CustomRoutes extends Component {
   render() {
     return (
       <AppConsumer>
-        {({ currency, ...rest }) => {
+        {({ currency, predictedProduct, settingNewPredictedProduct, ...rest }) => {
           return (
             <Query query={GET_CATEGORY_NAME}>
               {
@@ -34,7 +34,12 @@ export class CustomRoutes extends Component {
                               <React.Fragment key={category.name}>
                                 <Route key={category.name} path={`${category.name}`} element={<PLP category={category.name} currency={currency} />} >
                                 </Route>
-                                <Route path={`:categoryName/:productId`} element={<PDP categories={data.categories} currency={currency} />} />
+                                <Route path={`:categoryName/:productId`}
+                                  element={<PDP
+                                    predictedProduct={predictedProduct}
+                                    categories={data.categories}
+                                    currency={currency}
+                                    settingNewPredictedProduct={settingNewPredictedProduct} />} />
                               </React.Fragment>
                             )
                           })

@@ -253,7 +253,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  /* gap: 1.5rem; */
 }
 .attr__title {
   text-transform: uppercase;
@@ -280,13 +279,22 @@
   cursor: pointer;
   padding: 0 4px;
 }
+.attr__value.active {
+  background-color: #1d1f22;
+  color: #fff;
+}
 .attr__value:hover {
   background-color: #1d1f22;
   color: #fff;
 }
-.attr__value-color:hover {
+.attr__value-color {
+  transition: all 0.3s;
+}
+.attr__value-color:hover,
+.attr__value-color.active {
   border: 2px solid #fff;
   outline: 1px solid #1d1f22;
+  box-shadow: 0px 0px 5px 3px #171718;
 }
 
 .attr__price {

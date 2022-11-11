@@ -9,18 +9,23 @@ import CustomRoutes from "./routes/CustomRoutes";
 import { AppProvider } from "./components/context/appContext";
 
 export class App extends Component {
-  state = {
-    currency: "USD",
-    currencySymbol: "$",
-    currencyModal: false,
-    productExist: { index: 0, flag: false },
-    predictedProduct: {},
-    shoopingCart: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      currency: "USD",
+      currencySymbol: "$",
+      currencyModal: false,
+      // productExist: { index: 0, flag: false },
+      predictedProduct: {},
+      shoopingCart: [],
+      productExistBol: false,
+      ptoductExistIndex: 0,
+    };
+  }
 
   componentDidUpdate() {
-    console.log(this.state.productExist.flag);
-    console.log(this.state.shoopingCart);
+    // console.log(this.state.productExist.flag);
+    // console.log(this.state.shoopingCart);
   }
 
   showCurrencyModal = () => {
@@ -51,37 +56,75 @@ export class App extends Component {
     // let newObjSorted = Object.keys(newObj)
     //   .sort()
     //   .reduce((acc, key) => ({ ...acc, [key]: newObj[key] }), {});
-    this.setState({ predictedProduct: newObj });
-    this.checkProductExistance();
+    this.setState({ ...this.state, predictedProduct: newObj });
+    // this.checkProductExistance();
   };
 
   checkProductExistance = () => {
-    let newShoppingCart = [...this.state.shoopingCart];
-    newShoppingCart.map((product, index) => {
-      if (product.id === this.state.predictedProduct.id) {
-        let value = Object.keys(product)
-          .filter((key) => key !== "id" && key !== "count")
-          .every((attr) => product[attr] === this.state.predictedProduct[attr]);
-        if (value) {
-          return this.setState({ productExist: { index, flag: true } });
-        } else {
-          this.setState({ productExist: { flag: false } });
-        }
-      } else {
-        this.setState({ productExist: { flag: false } });
-      }
+    let copyOfShoopingCart = [...this.state.shoopingCart];
+    copyOfShoopingCart.filter((product, index) => {
+      return Object.keys(product)
+        .filter((key) => key !== "id" && key !== "count")
+        .every((attr) => product[attr] === this.state.predictedProduct[attr]);
     });
+    // let newShoppingCart = [...this.state.shoopingCart];
+    // newShoppingCart.map((product, index) => {
+    //   if (product.id === this.state.predictedProduct.id) {
+    //     let value = Object.keys(product)
+    //       .filter((key) => key !== "id" && key !== "count")
+    //       .every((attr) => product[attr] === this.state.predictedProduct[attr]);
+    //     if (value) {
+    //       let obj = { ...this.state };
+    //       obj.productExistBol = true;
+    //       obj.ptoductExistIndex = index;
+    //       return this.setState(obj);
+    //     } else {
+    //       let obj = { ...this.state };
+    //       obj.productExistBol = false;
+    //       obj.ptoductExistIndex = index;
+    //       this.setState(obj);
+    //     }
+    //   } else {
+    //     let obj = { ...this.state };
+    //     obj.productExistBol = false;
+    //     obj.ptoductExistIndex = index;
+    //     this.setState(obj);
+    //   }
+    // });
   };
 
   addToCart = () => {
-    let newObj = [...this.state.shoopingCart];
-    if (!this.state.productExist.flag) {
-      newObj.push(this.state.predictedProduct);
-      this.setState({ productExist: { index: newObj.length - 1, flag: true } });
-    } else {
-      newObj[this.state.productExist.index].count++;
-    }
-    this.setState({ shoopingCart: newObj });
+    // console.log(this.state.predictedProduct);
+    // let newObj = [...this.state.shoopingCart];
+    // if (!this.state.productExistBol) {
+    //   newObj.push(this.state.predictedProduct);
+    //   // console.log(this.state.predictedProduct);
+    //   // console.log(newObj);
+    //   let count = this.state.count;
+    //   this.setState(
+    //     { ...this.state, shoopingCart: [...newObj], count: count++ },
+    //     console.log(this.state)
+    //   );
+    //   // this.setState({ productExist: { index: newObj.length - 1, flag: true } });
+    //   let obj = { ...this.state };
+    //   obj.productExistBol = true;
+    //   obj.ptoductExistIndex = newObj.length - 1;
+    //   this.setState(obj);
+    // } else {
+    //   let productToModifyCount = {
+    //     ...this.state.shoopingCart[this.state.ptoductExistIndex],
+    //   };
+    //   productToModifyCount.count++;
+    //   // newObj[this.state.productExistIndex].count++;
+    //   this.setState({
+    //     ...this.state,
+    //     shoopingCart: [...this.state.shoopingCart, productToModifyCount],
+    //   });
+    // }
+    let copyOfShoopingCart = [...this.state.shoopingCart];
+    copyOfShoopingCart.push(this.state.predictedProduct);
+    this.setState({ shoopingCart: copyOfShoopingCart });
+    console.log(this.state.productExistBol, this.state.ptoductExistIndex);
   };
 
   render() {

@@ -11,14 +11,18 @@ import { AppConsumer } from '../context/appContext';
 
 class PDP extends Component {
 
-  state = {
-    categoryName: "",
-    productId: "",
-    productObject: {},
-    heroImg: "",
-    currency: null,
-    priceObject: {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      categoryName: "",
+      productId: "",
+      productObject: {},
+      heroImg: "",
+      currency: null,
+      priceObject: {}
+    }
   }
+
 
   componentDidMount() {
     //get some data from params
@@ -113,7 +117,7 @@ class PDP extends Component {
                                   {this.state.priceObject[0].currency.symbol}{this.state.priceObject[0].amount}
                                 </h3>
                                 <button
-                                  onClick={() => addToCart(predictedProduct)}
+                                  onClick={addToCart}
                                   className='add-to-cart'>ADD to Cart</button>
                                 <div className='description'>{parse(this.state.productObject.description)}</div>
                               </div>

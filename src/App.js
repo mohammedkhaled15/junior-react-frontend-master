@@ -1,6 +1,6 @@
 //libraries components
 import { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, json } from "react-router-dom";
 //css file
 import "./App.css";
 //custom components
@@ -15,18 +15,32 @@ export class App extends Component {
       currency: "USD",
       currencySymbol: "$",
       currencyModal: false,
-      // productExist: { index: 0, flag: false },
       predictedProduct: {},
       shoopingCart: [],
+      totallProducts: 0,
       productExistBol: false,
       productExistIndex: -1,
     };
   }
 
-  componentDidUpdate() {
-    console.log(this.state.predictedProduct);
-    console.log(this.state.shoopingCart);
-    console.log(this.state.productExistBol, this.state.productExistIndex);
+  componentDidUpdate(prevState, prevProps) {
+    // console.log(this.state.predictedProduct);
+    // console.log(this.state.shoopingCart);
+    // console.log(this.state.productExistBol, this.state.productExistIndex);
+    // this.calcTotallProducts();
+    // if (
+    //   json.toString([...prevState.shoopingCart]) !==
+    //   json.toString([...this.state.shoopingCart])
+    // ) {
+    //   console.log("changed");
+    // }
+    // if (
+    //   json.toString([...prevState.shoopingCart]) !==
+    //   json.toString(this.state.shoopingCart)
+    // ) {
+    //   console.log("changed");
+    // }
+    // console.log(prevState, prevProps);
   }
 
   showCurrencyModal = () => {
@@ -54,10 +68,7 @@ export class App extends Component {
   addAttrToProduct = (attrName, value) => {
     let newObj = { ...this.state.predictedProduct };
     newObj[`${attrName}`] = value;
-    if (!this.state.productExistBol) newObj.count = 1;
-    // let newObjSorted = Object.keys(newObj)
-    //   .sort()
-    //   .reduce((acc, key) => ({ ...acc, [key]: newObj[key] }), {});
+    newObj.count = 1;
     this.setState({ predictedProduct: newObj }, () =>
       this.checkProductExistance()
     );
@@ -65,19 +76,6 @@ export class App extends Component {
 
   checkProductExistance = () => {
     let copyOfShoopingCart = [...this.state.shoopingCart];
-    // copyOfShoopingCart.filter((product, index) => {
-    //   if (
-    //     Object.keys(product)
-    //       .filter((key) => key !== "count")
-    //       .every((attr) => product[attr] === this.state.predictedProduct[attr])
-    //   ) {
-    //     this.setState({ productExistBol: true, productExistIndex: index });
-    //     return true;
-    //   } else {
-    //     this.setState({ productExistBol: false, productExistIndex: -1 });
-    //     return false;
-    //   }
-    // });
     for (let i = 0; i < copyOfShoopingCart.length; i++) {
       if (
         Object.keys(copyOfShoopingCart[i])
@@ -99,16 +97,34 @@ export class App extends Component {
     if (this.state.productExistBol) {
       let copyOfShoopingCart = [...this.state.shoopingCart];
       copyOfShoopingCart[this.state.productExistIndex].count++;
-      this.setState({ shoopingCart: copyOfShoopingCart });
+      this.setState(
+        { shoopingCart: copyOfShoopingCart },
+        this.calcTotallProducts()
+      );
     } else {
       let copyOfShoopingCart = [...this.state.shoopingCart];
       copyOfShoopingCart.push(this.state.predictedProduct);
-      this.setState({ shoopingCart: copyOfShoopingCart });
+      this.setState(
+        { shoopingCart: copyOfShoopingCart },
+        this.calcTotallProducts()
+      );
       this.setState({
         productExistBol: true,
         productExistIndex: copyOfShoopingCart.length - 1,
       });
     }
+  };
+
+  calcTotallProducts = () => {
+    let totallProducts = this.state.shoopingCart.reduce(
+      (acc, curr) => (acc += curr.count),
+      0
+    );
+    // for (let i = 0; i < this.state.shoopingCart.length; i++) {
+    //   totallProducts += this.state.shoopingCart[i].count;
+    // }
+
+    console.log(totallProducts);
   };
 
   render() {
@@ -120,6 +136,8 @@ export class App extends Component {
             currencySymbol: this.state.currencySymbol,
             currencyModal: this.state.currencyModal,
             predictedProduct: this.state.predictedProduct,
+            shoopingCart: this.state.shoopingCart,
+            totallProducts: this.state.totallProducts,
             changeCurrency: this.changeCurrency,
             showCurrencyModal: this.showCurrencyModal,
             hideCurrencyModal: this.hideCurrencyModal,

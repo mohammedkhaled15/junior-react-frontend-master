@@ -11,7 +11,7 @@ export class Actions extends Component {
     render() {
         return (
             <AppConsumer>
-                {({ currency, currencySymbol, currencyModal, changeCurrency, showCurrencyModal, hideCurrencyModal }) => {
+                {({ currency, currencySymbol, currencyModal, changeCurrency, showCurrencyModal, totallProducts }) => {
                     return (
                         <div className='navigation__actions'>
                             <div onClick={showCurrencyModal} className='navigation__actions__currency'>
@@ -46,6 +46,7 @@ export class Actions extends Component {
                             </div>
                             <div className='navigation__actions-cart'>
                                 <img src={cart} alt="cart" width={"24px"} />
+                                {totallProducts !== 0 ? <div className='navigation__actions-cart-ind'>{totallProducts}</div> : null}
                             </div>
                         </div >
                     )

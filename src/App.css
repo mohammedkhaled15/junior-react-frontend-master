@@ -111,6 +111,24 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
+}
+.navigation__actions-cart-ind {
+  position: absolute;
+  color: #fff;
+  background-color: #171718;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+  /* padding: 0.2rem; */
+  bottom: 50%;
+  left: 85%;
 }
 .PLP {
   width: 80%;

@@ -1,6 +1,6 @@
 //libraries components
 import { Component } from "react";
-import { BrowserRouter, json } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 //css file
 import "./App.css";
 //custom components
@@ -20,35 +20,21 @@ export class App extends Component {
       totallProducts: 0,
       productExistBol: false,
       productExistIndex: -1,
+      cartModal: false,
     };
   }
 
-  componentDidUpdate(prevState, prevProps) {
-    // console.log(this.state.predictedProduct);
-    // console.log(this.state.shoopingCart);
-    // console.log(this.state.productExistBol, this.state.productExistIndex);
-    // this.calcTotallProducts();
-    // if (
-    //   json.toString([...prevState.shoopingCart]) !==
-    //   json.toString([...this.state.shoopingCart])
-    // ) {
-    //   console.log("changed");
-    // }
-    // if (
-    //   json.toString([...prevState.shoopingCart]) !==
-    //   json.toString(this.state.shoopingCart)
-    // ) {
-    //   console.log("changed");
-    // }
-    // console.log(prevState, prevProps);
-  }
+  showCartModal = () => {
+    this.setState({ cartModal: !this.state.cartModal });
+    console.log("clicked");
+  };
 
   showCurrencyModal = () => {
     this.setState({ currencyModal: !this.state.currencyModal });
   };
 
-  hideCurrencyModal = (e) => {
-    this.setState({ currencyModal: false });
+  hideAnyModal = (e) => {
+    this.setState({ currencyModal: false, cartModal: false });
     e.stopPropagation();
   };
   changeCurrency = (currency, symbol) => {
@@ -133,9 +119,11 @@ export class App extends Component {
             predictedProduct: this.state.predictedProduct,
             shoopingCart: this.state.shoopingCart,
             totallProducts: this.state.totallProducts,
+            cartModal: this.state.cartModal,
+            showCartModal: this.showCartModal,
             changeCurrency: this.changeCurrency,
             showCurrencyModal: this.showCurrencyModal,
-            hideCurrencyModal: this.hideCurrencyModal,
+            hideAnyModal: this.hideAnyModal,
             addAttrToProduct: this.addAttrToProduct,
             addToCart: this.addToCart,
             settingNewPredictedProduct: this.settingNewPredictedProduct,

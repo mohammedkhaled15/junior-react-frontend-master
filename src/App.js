@@ -97,15 +97,13 @@ export class App extends Component {
     if (this.state.productExistBol) {
       let copyOfShoopingCart = [...this.state.shoopingCart];
       copyOfShoopingCart[this.state.productExistIndex].count++;
-      this.setState(
-        { shoopingCart: copyOfShoopingCart },
+      this.setState({ shoopingCart: copyOfShoopingCart }, () =>
         this.calcTotallProducts()
       );
     } else {
       let copyOfShoopingCart = [...this.state.shoopingCart];
       copyOfShoopingCart.push(this.state.predictedProduct);
-      this.setState(
-        { shoopingCart: copyOfShoopingCart },
+      this.setState({ shoopingCart: copyOfShoopingCart }, () =>
         this.calcTotallProducts()
       );
       this.setState({
@@ -116,15 +114,12 @@ export class App extends Component {
   };
 
   calcTotallProducts = () => {
+    console.log(this.state.shoopingCart);
     let totallProducts = this.state.shoopingCart.reduce(
-      (acc, curr) => (acc += curr.count),
+      (acc, { count }) => acc + count,
       0
     );
-    // for (let i = 0; i < this.state.shoopingCart.length; i++) {
-    //   totallProducts += this.state.shoopingCart[i].count;
-    // }
-
-    console.log(totallProducts);
+    this.setState({ totallProducts: totallProducts });
   };
 
   render() {

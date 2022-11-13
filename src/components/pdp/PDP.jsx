@@ -35,12 +35,11 @@ class PDP extends Component {
     let priceObject = productObject.prices.filter(price => price.currency.label === this.props.currency)
     //setting currrency = to props currency
     let currency = this.props.currency
-    //setting the state wih the new values
-    this.setState({ categoryName, productId, productObject, heroImg: imgUrl, currency, priceObject })
+    //setting the state wih the new values and setting predict product with new product as acaalback function 
+    this.setState({ categoryName, productId, productObject, heroImg: imgUrl, currency, priceObject }, () => this.props.settingNewPredictedProduct(this.state.productObject, this.state.priceObject[0]))
 
     // resetting predicted product to the new one with new id
-    // console.log(this.props.predictedProduct)
-    this.props.settingNewPredictedProduct(this.props.params.productId)
+    //this.props.params.productId
   }
 
   componentDidUpdate(prevProps) {

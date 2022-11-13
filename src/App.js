@@ -44,9 +44,12 @@ export class App extends Component {
     this.setState(newState);
   };
 
-  settingNewPredictedProduct = (productId) => {
+  settingNewPredictedProduct = (product, price) => {
     let newObj = {};
-    newObj.id = productId;
+    newObj.id = product.id;
+    newObj.name = product.name;
+    newObj.brand = product.brand;
+    newObj.price = price;
     newObj.count = 1;
     this.setState({ predictedProduct: newObj });
   };

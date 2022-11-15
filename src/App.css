@@ -306,13 +306,13 @@
   color: #fff;
 }
 .attr__value-color {
-  transition: all 0.3s;
+  transition: all 0.1s;
 }
 .attr__value-color:hover,
 .attr__value-color.active {
   border: 2px solid #fff;
-  outline: 1px solid #1d1f22;
-  box-shadow: 0px 0px 5px 3px #171718;
+  outline: 1px solid #5ece7b;
+  box-shadow: 0px 0px 5px 3px #5ece7b;
 }
 
 .attr__price {
@@ -343,14 +343,13 @@
 .cartmodal {
   position: absolute;
   width: 325px;
-  height: 200px;
+  /* height: 200px; */
   padding: 2rem 1rem;
   background-color: #171718;
   list-style-type: none;
   z-index: 20;
   top: 120%;
   right: 0;
-  height: 140px;
   cursor: default;
   overflow-y: scroll;
   box-shadow: 0px 4px 35px 0 rgba(168, 172, 176, 1);
@@ -383,7 +382,24 @@
   justify-content: flex-start;
   align-items: center;
   gap: 0.25rem;
+  margin-bottom: 52px;
 }
 .cartmodal__content__item-details {
   width: 45%;
+}
+.cartmodal__content__item-counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+}
+.cartmodal__content__item-counter span {
+  border: 1px solid black;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  cursor: pointer;
 }

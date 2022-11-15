@@ -24,9 +24,12 @@ export class App extends Component {
     };
   }
 
+  handleCounterIncreament = () => {
+    console.log("increase");
+  };
+
   showCartModal = () => {
     this.setState({ cartModal: !this.state.cartModal });
-    console.log("clicked");
   };
 
   showCurrencyModal = () => {
@@ -37,6 +40,7 @@ export class App extends Component {
     this.setState({ currencyModal: false, cartModal: false });
     e.stopPropagation();
   };
+
   changeCurrency = (currency, symbol) => {
     const newState = { ...this.state };
     newState.currency = currency;
@@ -50,6 +54,7 @@ export class App extends Component {
     newObj.name = product.name;
     newObj.brand = product.brand;
     newObj.price = price;
+    newObj.attrs = product.attributes;
     newObj.count = 1;
     this.setState({ predictedProduct: newObj });
   };
@@ -103,7 +108,7 @@ export class App extends Component {
   };
 
   calcTotallProducts = () => {
-    console.log(this.state.shoopingCart);
+    // console.log(this.state.shoopingCart);
     let totallProducts = this.state.shoopingCart.reduce(
       (acc, { count }) => acc + count,
       0
@@ -130,6 +135,7 @@ export class App extends Component {
             addAttrToProduct: this.addAttrToProduct,
             addToCart: this.addToCart,
             settingNewPredictedProduct: this.settingNewPredictedProduct,
+            handleCounterIncreament: this.handleCounterIncreament,
           }}
         >
           <CustomRoutes />

@@ -16,20 +16,43 @@ export class App extends Component {
       currencySymbol: "$",
       currencyModal: false,
       predictedProduct: {},
-      shoopingCart: [],
+      shoppingCart: [],
       totallProducts: 0,
       productExistBol: false,
       productExistIndex: -1,
       cartModal: false,
+      totalPrice: 0,
     };
   }
 
-  handleCounterIncreament = () => {
-    console.log("increase");
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.totallProducts !== this.state.totallProducts) {
+      this.calcTotalPrice();
+    }
+    // console.log(prevState);
+  }
+
+  handleCounterIncreament = (item) => {
+    let newShoppingCart = [...this.state.shoppingCart];
+    const index = newShoppingCart.indexOf(item);
+    newShoppingCart[index] = { ...newShoppingCart[index] };
+    newShoppingCart[index].count++;
+    this.setState({ shoppingCart: newShoppingCart }, () =>
+      this.calcTotallProducts()
+    );
+  };
+  handleCounterDecreament = (item) => {
+    let newShoppingCart = [...this.state.shoppingCart];
+    const index = newShoppingCart.indexOf(item);
+    newShoppingCart[index] = { ...newShoppingCart[index] };
+    newShoppingCart[index].count--;
+    this.setState({ shoppingCart: newShoppingCart }, () =>
+      this.calcTotallProducts()
+    );
   };
 
   showCartModal = () => {
-    this.setState({ cartModal: !this.state.cartModal });
+    this.setState({ cartModal: true });
   };
 
   showCurrencyModal = () => {
@@ -69,14 +92,14 @@ export class App extends Component {
   };
 
   checkProductExistance = () => {
-    let copyOfShoopingCart = [...this.state.shoopingCart];
-    for (let i = 0; i < copyOfShoopingCart.length; i++) {
+    let copyOfshoppingCart = [...this.state.shoppingCart];
+    for (let i = 0; i < copyOfshoppingCart.length; i++) {
       if (
-        Object.keys(copyOfShoopingCart[i])
+        Object.keys(copyOfshoppingCart[i])
           .filter((key) => key !== "count")
           .every(
             (attr) =>
-              copyOfShoopingCart[i][attr] === this.state.predictedProduct[attr]
+              copyOfshoppingCart[i][attr] === this.state.predictedProduct[attr]
           )
       ) {
         this.setState({ productExistBol: true, productExistIndex: i });
@@ -89,31 +112,39 @@ export class App extends Component {
 
   addToCart = () => {
     if (this.state.productExistBol) {
-      let copyOfShoopingCart = [...this.state.shoopingCart];
-      copyOfShoopingCart[this.state.productExistIndex].count++;
-      this.setState({ shoopingCart: copyOfShoopingCart }, () =>
+      let copyOfshoppingCart = [...this.state.shoppingCart];
+      copyOfshoppingCart[this.state.productExistIndex].count++;
+      this.setState({ shoppingCart: copyOfshoppingCart }, () =>
         this.calcTotallProducts()
       );
     } else {
-      let copyOfShoopingCart = [...this.state.shoopingCart];
-      copyOfShoopingCart.push(this.state.predictedProduct);
-      this.setState({ shoopingCart: copyOfShoopingCart }, () =>
+      let copyOfShoppingCart = [...this.state.shoppingCart];
+      copyOfShoppingCart.push(this.state.predictedProduct);
+      this.setState({ shoppingCart: copyOfShoppingCart }, () =>
         this.calcTotallProducts()
       );
       this.setState({
         productExistBol: true,
-        productExistIndex: copyOfShoopingCart.length - 1,
+        productExistIndex: copyOfShoppingCart.length - 1,
       });
     }
   };
 
   calcTotallProducts = () => {
-    // console.log(this.state.shoopingCart);
-    let totallProducts = this.state.shoopingCart.reduce(
+    let totallProducts = this.state.shoppingCart.reduce(
       (acc, { count }) => acc + count,
       0
     );
     this.setState({ totallProducts: totallProducts });
+  };
+
+  calcTotalPrice = () => {
+    let newState = { ...this.state };
+    newState.totalPrice = this.state.shoppingCart.reduce(
+      (acc, item) => acc + item.price.amount * item.count,
+      0
+    );
+    this.setState(newState);
   };
 
   render() {
@@ -125,9 +156,10 @@ export class App extends Component {
             currencySymbol: this.state.currencySymbol,
             currencyModal: this.state.currencyModal,
             predictedProduct: this.state.predictedProduct,
-            shoopingCart: this.state.shoopingCart,
+            shoppingCart: this.state.shoppingCart,
             totallProducts: this.state.totallProducts,
             cartModal: this.state.cartModal,
+            totalPrice: this.state.totalPrice,
             showCartModal: this.showCartModal,
             changeCurrency: this.changeCurrency,
             showCurrencyModal: this.showCurrencyModal,
@@ -136,6 +168,8 @@ export class App extends Component {
             addToCart: this.addToCart,
             settingNewPredictedProduct: this.settingNewPredictedProduct,
             handleCounterIncreament: this.handleCounterIncreament,
+            handleCounterDecreament: this.handleCounterDecreament,
+            calcTotalPrice: this.calcTotalPrice,
           }}
         >
           <CustomRoutes />

@@ -343,13 +343,13 @@
 .cartmodal {
   position: absolute;
   width: 325px;
-  /* height: 200px; */
+  max-height: 550px;
   padding: 2rem 1rem;
   background-color: #171718;
   list-style-type: none;
   z-index: 20;
-  top: 120%;
-  right: 0;
+  top: 8%;
+  right: 10%;
   cursor: default;
   overflow-y: scroll;
   box-shadow: 0px 4px 35px 0 rgba(168, 172, 176, 1);
@@ -374,6 +374,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 32px;
 }
 .cartmodal__content__item {
   width: 100%;
@@ -393,7 +394,7 @@
   justify-content: space-between;
   align-self: stretch;
 }
-.cartmodal__content__item-counter span {
+.cartmodal__content__item-counter span:is(:first-child, :last-child) {
   border: 1px solid black;
   width: 24px;
   height: 24px;
@@ -402,4 +403,52 @@
   align-items: center;
   font-size: 1.25rem;
   cursor: pointer;
+}
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 19;
+  cursor: default;
+}
+.cartmodal__content__total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+.cartmodal__content__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+}
+.cartmodal__content__buttons button {
+  width: 50%;
+  padding: 16px 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+.cartmodal__content__buttons button:is(:first-child) {
+  border: 1px solid #1d1f22;
+  background-color: #ffff;
+  color: rgba(29, 31, 34, 1);
+}
+.cartmodal__content__buttons button:is(:last-child) {
+  background-color: #5ece7b;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
 }

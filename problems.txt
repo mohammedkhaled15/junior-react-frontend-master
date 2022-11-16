@@ -1,0 +1,5 @@
+1- make default values for each attr of selected product //Done
+2- Bind user to use one currency at shopping cart
+3- adding image to each product in cartmodal //Done
+4- Deleting element when its count become zero //Done
+5- prevent user from buying items which aren't in stock //Done

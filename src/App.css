@@ -217,8 +217,8 @@
   cursor: pointer;
 }
 .PDP__aside__img-container img.active-pic {
-  border: 1px solid #1d1f22;
-  box-shadow: 0px 0px 5px 2px #171718;
+  border: 1px solid #5ece7b;
+  box-shadow: 0px 0px 5px 2px #5ece7b;
 }
 .PDP__aside__img-container img {
   max-width: 100px;
@@ -451,4 +451,17 @@
   border: none;
   color: #fff;
   text-transform: uppercase;
+}
+.cartmodal__content__item-image {
+  flex: 1;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cartmodal__content__item-image img {
+  max-width: 100%;
+  max-height: 100%;
+  align-self: stretch;
+  object-fit: contain;
 }

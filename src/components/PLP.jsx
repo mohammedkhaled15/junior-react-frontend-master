@@ -31,11 +31,11 @@ export class PLP extends Component {
                           price: wantedPriceObject.amount
                         }
                       }
-                      //simply distructur object
+                      //simply distructure object
                       const { symbol, price } = getPriceForCurrency(currency)
                       // console.log(this.props.category)
                       return (
-                        <Link key={product.id} to={`${product.id}`} className='PLP__content__card'>
+                        <Link style={!product.inStock ? { pointerEvents: "none" } : null} key={product.id} to={`${product.id}`} className='PLP__content__card'>
                           <img src={product.gallery[0]} alt="product" />
                           <div className='PLP__content__card__desc'>
                             <div style={{ width: "100%", display: "flex", justifyContent: "space-around" }}>

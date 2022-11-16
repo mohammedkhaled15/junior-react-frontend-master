@@ -29,7 +29,6 @@ export class App extends Component {
     if (prevState.totallProducts !== this.state.totallProducts) {
       this.calcTotalPrice();
     }
-    // console.log(prevState);
   }
 
   handleCounterIncreament = (item) => {
@@ -42,13 +41,26 @@ export class App extends Component {
     );
   };
   handleCounterDecreament = (item) => {
+    console.log("decreament");
     let newShoppingCart = [...this.state.shoppingCart];
     const index = newShoppingCart.indexOf(item);
     newShoppingCart[index] = { ...newShoppingCart[index] };
     newShoppingCart[index].count--;
-    this.setState({ shoppingCart: newShoppingCart }, () =>
-      this.calcTotallProducts()
-    );
+    console.log(newShoppingCart);
+    if (newShoppingCart[index].count === 0) {
+      let filteredNewShoppingCart = newShoppingCart.filter(
+        (product) => product.count !== 0
+      );
+      console.log(filteredNewShoppingCart);
+      this.setState({ shoppingCart: filteredNewShoppingCart }, () => {
+        this.calcTotallProducts();
+        this.checkProductExistance();
+      });
+    } else {
+      this.setState({ shoppingCart: newShoppingCart }, () =>
+        this.calcTotallProducts()
+      );
+    }
   };
 
   showCartModal = () => {
@@ -79,6 +91,14 @@ export class App extends Component {
     newObj.price = price;
     newObj.attrs = product.attributes;
     newObj.count = 1;
+    newObj.thumbnail = product.gallery[0];
+    // setting default values to each product
+    product.attributes.map((attr) => {
+      return (newObj[attr.name] =
+        product.attributes[
+          product.attributes.indexOf(attr)
+        ].items[0].displayValue);
+    });
     this.setState({ predictedProduct: newObj });
   };
 
@@ -113,6 +133,7 @@ export class App extends Component {
   addToCart = () => {
     if (this.state.productExistBol) {
       let copyOfshoppingCart = [...this.state.shoppingCart];
+      // console.log(copyOfshoppingCart);
       copyOfshoppingCart[this.state.productExistIndex].count++;
       this.setState({ shoppingCart: copyOfshoppingCart }, () =>
         this.calcTotallProducts()

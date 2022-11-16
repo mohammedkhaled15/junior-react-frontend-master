@@ -56,18 +56,22 @@ export default class CartModal extends Component {
                             <span style={{ fontWeigth: "500", fontSize: "16px", textAlign: "center" }}>{item.count}</span>
                             <span onClick={() => handleCounterDecreament(item)}>-</span>
                           </div>
-                          <div className='cartmodal__content__item-image'>image</div>
+                          <div className='cartmodal__content__item-image'>
+                            <img src={item.thumbnail} alt="preview" />
+                          </div>
                         </div>
                       )
                     })}
-                    <div className='cartmodal__content__total'>
-                      <span>Total</span>
-                      <span>{currencySymbol}{totalPrice.toFixed(2)}</span>
-                    </div>
-                    <div className='cartmodal__content__buttons'>
-                      <button>View Bag</button>
-                      <button>Check Out</button>
-                    </div>
+                    {totallProducts > 0 &&
+                      <div className='cartmodal__content__total'>
+                        <span>Total</span>
+                        <span>{currencySymbol}{totalPrice.toFixed(2)}</span>
+                      </div>}
+                    {totallProducts > 0 &&
+                      <div className='cartmodal__content__buttons'>
+                        <button>View Bag</button>
+                        <button>Check Out</button>
+                      </div>}
                   </div>
                 </div>
               </div>

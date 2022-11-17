@@ -48,7 +48,7 @@ export class Actions extends Component {
               <div onClick={showCartModal} className='navigation__actions-cart'>
                 <img src={cart} alt="cart" width={"24px"} />
                 {totallProducts !== 0 ? <div className='navigation__actions-cart-ind'>{totallProducts}</div> : null}
-                {cartModal && <CartModal />}
+                {cartModal && <CartModal totallProducts={totallProducts} />}
               </div>
             </div >
           )

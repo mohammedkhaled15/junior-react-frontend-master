@@ -6,7 +6,7 @@ export default class CartModal extends Component {
     return (
       <AppConsumer>
         {
-          ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currencySymbol }) => {
+          ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency }) => {
             return (
               <div className='backdrop' onClick={hideAnyModal}>
                 <div className='cartmodal' onClick={e => e.stopPropagation()}>
@@ -18,13 +18,16 @@ export default class CartModal extends Component {
                   </h2>
                   <div className='cartmodal__content'>
                     {shoppingCart.map((item, index) => {
-                      // console.log(item)
+                      console.log(item)
                       return (
                         <div key={item.id + `${index}`} className='cartmodal__content__item'>
                           <div className='cartmodal__content__item-details'>
                             <h5 style={{ fontWeight: "300", fontSize: "16px" }}>{item.brand}</h5>
                             <h5 style={{ fontWeight: "300", fontSize: "16px", marginBottom: "4px" }}>{item.name}</h5>
-                            <h5 style={{ fontWeight: "500", fontSize: "16px", marginBottom: "8px" }}>{item.price.currency.symbol}{item.price.amount}</h5>
+                            <h5 style={{ fontWeight: "500", fontSize: "16px", marginBottom: "8px" }}>
+                              {item.prices.filter(price => price.currency.label === currency)[0].currency.symbol}
+                              {item.prices.filter(price => price.currency.label === currency)[0].amount}
+                            </h5>
                             {
                               item.attrs.map(attr => {
                                 return (
@@ -65,7 +68,9 @@ export default class CartModal extends Component {
                     {totallProducts > 0 &&
                       <div className='cartmodal__content__total'>
                         <span>Total</span>
-                        <span>{currencySymbol}{totalPrice.toFixed(2)}</span>
+                        <span>
+                          {shoppingCart[shoppingCart.length - 1]?.prices?.filter(price => price.currency.label === currency)[0].currency.symbol}
+                          {totalPrice.toFixed(2)}</span>
                       </div>}
                     {totallProducts > 0 &&
                       <div className='cartmodal__content__buttons'>

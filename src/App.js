@@ -26,7 +26,10 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.totallProducts !== this.state.totallProducts) {
+    if (
+      this.state.currency !== prevState.currency ||
+      prevState.totallProducts !== this.state.totallProducts
+    ) {
       this.calcTotalPrice();
     }
   }
@@ -41,7 +44,6 @@ export class App extends Component {
     );
   };
   handleCounterDecreament = (item) => {
-    console.log("decreament");
     let newShoppingCart = [...this.state.shoppingCart];
     const index = newShoppingCart.indexOf(item);
     newShoppingCart[index] = { ...newShoppingCart[index] };
@@ -88,6 +90,7 @@ export class App extends Component {
     newObj.id = product.id;
     newObj.name = product.name;
     newObj.brand = product.brand;
+    newObj.prices = product.prices;
     newObj.price = price;
     newObj.attrs = product.attributes;
     newObj.count = 1;
@@ -112,20 +115,26 @@ export class App extends Component {
   };
 
   checkProductExistance = () => {
+    console.log(this.state.shoppingCart);
     let copyOfshoppingCart = [...this.state.shoppingCart];
-    for (let i = 0; i < copyOfshoppingCart.length; i++) {
-      if (
-        Object.keys(copyOfshoppingCart[i])
-          .filter((key) => key !== "count")
-          .every(
-            (attr) =>
-              copyOfshoppingCart[i][attr] === this.state.predictedProduct[attr]
-          )
-      ) {
-        this.setState({ productExistBol: true, productExistIndex: i });
-        break;
-      } else {
-        this.setState({ productExistBol: false, productExistIndex: -1 });
+    if (this.state.shoppingCart.length === 0) {
+      this.setState({ productExistBol: false, productExistIndex: -1 });
+    } else {
+      for (let i = 0; i < copyOfshoppingCart.length; i++) {
+        if (
+          Object.keys(copyOfshoppingCart[i])
+            .filter((key) => key !== "count")
+            .every(
+              (attr) =>
+                copyOfshoppingCart[i][attr] ===
+                this.state.predictedProduct[attr]
+            )
+        ) {
+          this.setState({ productExistBol: true, productExistIndex: i });
+          break;
+        } else {
+          this.setState({ productExistBol: false, productExistIndex: -1 });
+        }
       }
     }
   };
@@ -162,7 +171,12 @@ export class App extends Component {
   calcTotalPrice = () => {
     let newState = { ...this.state };
     newState.totalPrice = this.state.shoppingCart.reduce(
-      (acc, item) => acc + item.price.amount * item.count,
+      (acc, item) =>
+        acc +
+        item.prices.filter(
+          (price) => price.currency.label === this.state.currency
+        )[0].amount *
+          item.count,
       0
     );
     this.setState(newState);

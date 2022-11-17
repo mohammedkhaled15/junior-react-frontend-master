@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { AppConsumer } from '../context/appContext'
+import CartContent from './CartContent'
 import ProductDetails from './ProductDetails'
 
 export default class CartModal extends Component {
@@ -18,12 +19,12 @@ export default class CartModal extends Component {
                       {totallProducts === 0 ? "" : totallProducts} {totallProducts === 0 ? "No Items" : totallProducts === 1 ? "item" : "items"}
                     </span>
                   </h2>
-                  <div className='cartmodal__content'>
+                  {/* <div className='cartmodal__content'>
                     {shoppingCart.map((item, index) => {
                       console.log(item)
                       return (
                         <div key={item.id + `${index}`} className='cartmodal__content__item'>
-                          {/* <div className='cartmodal__content__item-details'>
+                          <div className='cartmodal__content__item-details'>
                             <h5 style={{ fontWeight: "300", fontSize: "16px" }}>{item.brand}</h5>
                             <h5 style={{ fontWeight: "300", fontSize: "16px", marginBottom: "4px" }}>{item.name}</h5>
                             <h5 style={{ fontWeight: "500", fontSize: "16px", marginBottom: "8px" }}>
@@ -55,7 +56,7 @@ export default class CartModal extends Component {
                                 )
                               })
                             }
-                          </div> */}
+                          </div>
                           <ProductDetails item={item} currency={currency} />
                           <div className='cartmodal__content__item-counter'>
                             <span onClick={() => handleCounterIncreament(item)}>+</span>
@@ -78,11 +79,15 @@ export default class CartModal extends Component {
                     {totallProducts > 0 &&
                       <div className='cartmodal__content__buttons'>
                         <Link to="shoppingcart">
-                          <button onClick={hideAnyModal} className='cartmodal__content__buttons__viewbag'>View Bag</button>
+                          <button onClick={(e) => { hideAnyModal(); e.preventDefault() }} className='cartmodal__content__buttons__viewbag'>View Bag</button>
                         </Link>
                         <button className='cartmodal__content__buttons__checkout'>Check Out</button>
                       </div>}
-                  </div>
+                  </div> */}
+                  <CartContent
+                    shoppingCart={shoppingCart} currency={currency}
+                    handleCounterIncreament={handleCounterIncreament} handleCounterDecreament={handleCounterDecreament} totallProducts={totallProducts} totalPrice={totalPrice} hideAnyModal={hideAnyModal}
+                    view={"cartModal"} />
                 </div>
               </div>
             )

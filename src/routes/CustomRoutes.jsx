@@ -46,7 +46,7 @@ export class CustomRoutes extends Component {
                             )
                           })
                         }
-                        <Route path="shoppingcart" element={<ShoppingCart />} />
+                        <Route path="/shoppingcart" element={<ShoppingCart />} />
                         <Route path="/*" element={<h1 style={{ fontSize: "200px", marginTop: "200px" }}>404 Error</h1>} />
                       </Route>
                     </Routes>

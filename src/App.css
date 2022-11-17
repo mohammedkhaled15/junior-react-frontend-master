@@ -435,18 +435,19 @@
   gap: 12px;
 }
 .cartmodal__content__buttons button {
-  width: 50%;
   padding: 16px 30px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
 }
-.cartmodal__content__buttons button:is(:first-child) {
+.cartmodal__content__buttons__viewbag {
+  width: 100%;
   border: 1px solid #1d1f22;
   background-color: #ffff;
   color: rgba(29, 31, 34, 1);
 }
-.cartmodal__content__buttons button:is(:last-child) {
+.cartmodal__content__buttons__checkout {
+  width: 50%;
   background-color: #5ece7b;
   border: none;
   color: #fff;
@@ -464,4 +465,12 @@
   max-height: 100%;
   align-self: stretch;
   object-fit: contain;
+}
+.shoppingcart {
+  width: 80%;
+  margin-inline: auto;
+  margin-top: 80px;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: row;
 }

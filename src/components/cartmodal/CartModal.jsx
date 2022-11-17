@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { AppConsumer } from '../context/appContext'
+import ProductDetails from './ProductDetails'
 
 export default class CartModal extends Component {
   render() {
@@ -21,7 +23,7 @@ export default class CartModal extends Component {
                       console.log(item)
                       return (
                         <div key={item.id + `${index}`} className='cartmodal__content__item'>
-                          <div className='cartmodal__content__item-details'>
+                          {/* <div className='cartmodal__content__item-details'>
                             <h5 style={{ fontWeight: "300", fontSize: "16px" }}>{item.brand}</h5>
                             <h5 style={{ fontWeight: "300", fontSize: "16px", marginBottom: "4px" }}>{item.name}</h5>
                             <h5 style={{ fontWeight: "500", fontSize: "16px", marginBottom: "8px" }}>
@@ -53,7 +55,8 @@ export default class CartModal extends Component {
                                 )
                               })
                             }
-                          </div>
+                          </div> */}
+                          <ProductDetails item={item} currency={currency} />
                           <div className='cartmodal__content__item-counter'>
                             <span onClick={() => handleCounterIncreament(item)}>+</span>
                             <span style={{ fontWeigth: "500", fontSize: "16px", textAlign: "center" }}>{item.count}</span>
@@ -74,8 +77,10 @@ export default class CartModal extends Component {
                       </div>}
                     {totallProducts > 0 &&
                       <div className='cartmodal__content__buttons'>
-                        <button>View Bag</button>
-                        <button>Check Out</button>
+                        <Link to="shoppingcart">
+                          <button onClick={hideAnyModal} className='cartmodal__content__buttons__viewbag'>View Bag</button>
+                        </Link>
+                        <button className='cartmodal__content__buttons__checkout'>Check Out</button>
                       </div>}
                   </div>
                 </div>

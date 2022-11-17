@@ -1,10 +1,11 @@
 //Libraries
 import { Component } from "react";
 import { Query } from '@apollo/client/react/components';
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 //Components
 import PLP from "../components/PLP";
 import SharedLayout from "../components/SharedLayout";
+import ShoppingCart from "../components/shoppingcart/ShoppingCart";
 //context
 import { AppConsumer } from "../components/context/appContext";
 //queries
@@ -24,10 +25,11 @@ export class CustomRoutes extends Component {
                 ({ loading, error, data }) => {
                   if (error) return "";
                   if (loading || !data) return "";
-                  // console.log(data.categories)
                   return (
                     <Routes>
                       <Route path="/" element={<SharedLayout />} >
+                        {/* making home page all products page */}
+                        <Route path="/" element={<Navigate to="/all" />} />
                         {
                           data.categories.map((category) => {
                             return (
@@ -44,6 +46,7 @@ export class CustomRoutes extends Component {
                             )
                           })
                         }
+                        <Route path="shoppingcart" element={<ShoppingCart />} />
                         <Route path="/*" element={<h1 style={{ fontSize: "200px", marginTop: "200px" }}>404 Error</h1>} />
                       </Route>
                     </Routes>

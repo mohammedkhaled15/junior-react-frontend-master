@@ -4,7 +4,7 @@ import cart from "../../assets/cart.svg"
 import { AppConsumer } from '../context/appContext'
 import { Query } from '@apollo/client/react/components'
 import { GET_CURRENCY_DATA } from '../../gql/Query'
-import CartModal from './CartModal'
+import CartModal from '../cartmodal/CartModal'
 
 
 export class Actions extends Component {

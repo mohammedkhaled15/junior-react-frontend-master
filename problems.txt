@@ -4,3 +4,5 @@
 4- Deleting element when its count become zero //Done
 5- prevent user from buying items which aren't in stock //Done
 6- you cant add new item after empty shopping cart!! // Done
+7- making All products the homepage //Done
+8- making Route for 

@@ -32,6 +32,12 @@ export class App extends Component {
     ) {
       this.calcTotalPrice();
     }
+    if (
+      JSON.stringify(this.state.predictedProduct) !==
+      JSON.stringify(prevState.predictedProduct)
+    ) {
+      this.checkProductExistance();
+    }
   }
 
   handleCounterIncreament = (item) => {

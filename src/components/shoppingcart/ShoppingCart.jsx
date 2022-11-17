@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import CartContent from '../cartmodal/CartContent'
-import ProductDetails from '../cartmodal/ProductDetails'
 import { AppConsumer } from '../context/appContext'
 
 export default class ShoppingCart extends Component {

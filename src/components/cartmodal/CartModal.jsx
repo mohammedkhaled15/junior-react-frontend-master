@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { AppConsumer } from '../context/appContext'
 import CartContent from './CartContent'
-import ProductDetails from './ProductDetails'
 
 export default class CartModal extends Component {
   render() {

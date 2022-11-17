@@ -9,6 +9,7 @@
   position: fixed;
   top: 0;
   z-index: 10;
+  box-shadow: 0px 2px 20px 0 rgba(94, 206, 123, 0.4);
 }
 .header__content {
   width: 80%;
@@ -287,6 +288,14 @@
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
+/* .attr__items span {
+  width: "24px";
+  height: "24px";
+  font-size: "14px";
+  font-weight: "400";
+  margin-bottom: "8px";
+  pointer-events: "none";
+} */
 .attr__value {
   min-width: fit-content;
   height: 36px;
@@ -296,6 +305,8 @@
   align-items: center;
   cursor: pointer;
   padding: 0 4px;
+  margin-bottom: 8px;
+  font-weight: 400;
 }
 .attr__value.active {
   background-color: #1d1f22;
@@ -307,6 +318,7 @@
 }
 .attr__value-color {
   transition: all 0.1s;
+  margin-bottom: 8px;
 }
 .attr__value-color:hover,
 .attr__value-color.active {
@@ -394,8 +406,7 @@
   justify-content: space-between;
   align-self: stretch;
 }
-.cartmodal__content__item-counter span:is(:first-child, :last-child) {
-  border: 1px solid black;
+.cartmodal__content__item-counter span {
   width: 24px;
   height: 24px;
   display: flex;
@@ -403,6 +414,9 @@
   align-items: center;
   font-size: 1.25rem;
   cursor: pointer;
+}
+.cartmodal__content__item-counter span:is(:first-child, :last-child) {
+  border: 1px solid black;
 }
 .backdrop {
   position: fixed;

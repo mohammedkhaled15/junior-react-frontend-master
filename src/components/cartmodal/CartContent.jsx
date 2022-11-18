@@ -57,11 +57,14 @@ export default class CartContent extends Component {
               </div>
               <div className='cartmodal__content__item-image' style={this.props.view === "shoppingCart" ? { width: "22%", flex: "unset" } : null}>
                 <img src={item.thumbnail} alt="preview" />
-                {this.props.view === "shoppingCart" && item.gallery.length !== 1 && <div className='image-arrows'>
-                  {this.props.showLeftArrow && <img src={leftArrow} alt="left" onClick={() => this.props.prevImg(item)} />}
-                  {this.props.showRightArrow && <img src={rightArrow} alt="right" onClick={() => this.props.nextImg(item)} />}
-                </div>}
+                {this.props.view === "shoppingCart" && item.gallery.length !== 1 &&
+                  <div className='image-arrows' style={this.props.showRightArrow && !this.props.showLeftArrow ? { justifyContent: "end" } : null}>
+                    {this.props.showLeftArrow && <img src={leftArrow} alt="left" onClick={() => this.props.prevImg(item)} />}
+                    {this.props.showRightArrow && <img src={rightArrow} alt="right" onClick={() => this.props.nextImg(item)} />}
+                  </div>}
               </div>
+              {this.props.view === "shoppingCart" &&
+                <div style={{ width: "100%", height: "2px", backgroundColor: "rgba(229, 229, 229, 1)", marginTop: "30px" }}></div>}
             </div>
           )
         })}

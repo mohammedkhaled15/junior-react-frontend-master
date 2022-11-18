@@ -9,3 +9,4 @@
 9- working on shopping cart page //Done
 10- working on reusable components to bring shopping cart quickly //Done
 11- predictedProductExist function not working except when choosing attrs //Done
+12- remove scroll bar for other browsers

@@ -9,7 +9,7 @@ export default class CartModal extends Component {
         {
           ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency }) => {
             return (
-              <div className='backdrop' onClick={hideAnyModal}>
+              <div className='backdrop' onClick={(e) => hideAnyModal(e)}>
                 <div className='cartmodal' onClick={e => e.stopPropagation()}>
                   <h2 className='cartmodal__title'>
                     My Bag,

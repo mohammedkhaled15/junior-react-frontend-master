@@ -22,6 +22,8 @@ export class App extends Component {
       productExistIndex: -1,
       cartModal: false,
       totalPrice: 0,
+      showRightArrow: true,
+      showLeftArrow: false,
     };
   }
 
@@ -49,12 +51,12 @@ export class App extends Component {
       this.calcTotallProducts()
     );
   };
+
   handleCounterDecreament = (item) => {
     let newShoppingCart = [...this.state.shoppingCart];
     const index = newShoppingCart.indexOf(item);
     newShoppingCart[index] = { ...newShoppingCart[index] };
     newShoppingCart[index].count--;
-    console.log(newShoppingCart);
     if (newShoppingCart[index].count === 0) {
       let filteredNewShoppingCart = newShoppingCart.filter(
         (product) => product.count !== 0
@@ -101,6 +103,7 @@ export class App extends Component {
     newObj.attrs = product.attributes;
     newObj.count = 1;
     newObj.thumbnail = product.gallery[0];
+    newObj.gallery = product.gallery;
     // setting default values to each product
     product.attributes.map((attr) => {
       return (newObj[attr.name] =
@@ -121,7 +124,6 @@ export class App extends Component {
   };
 
   checkProductExistance = () => {
-    console.log(this.state.shoppingCart);
     let copyOfshoppingCart = [...this.state.shoppingCart];
     if (this.state.shoppingCart.length === 0) {
       this.setState({ productExistBol: false, productExistIndex: -1 });
@@ -129,7 +131,14 @@ export class App extends Component {
       for (let i = 0; i < copyOfshoppingCart.length; i++) {
         if (
           Object.keys(copyOfshoppingCart[i])
-            .filter((key) => key !== "count")
+            .filter(
+              (key) =>
+                key !== "count" &&
+                key !== "attrs" &&
+                key !== "price" &&
+                key !== "prices" &&
+                key !== "gallery"
+            )
             .every(
               (attr) =>
                 copyOfshoppingCart[i][attr] ===
@@ -188,6 +197,50 @@ export class App extends Component {
     this.setState(newState);
   };
 
+  nextImg = (item) => {
+    this.setState({ showLeftArrow: true });
+    let newShoppingCart = [...this.state.shoppingCart];
+    let indexOfItem = newShoppingCart.indexOf(item);
+    let imgIndex = newShoppingCart[indexOfItem].gallery.indexOf(
+      newShoppingCart[indexOfItem].thumbnail
+    );
+    if (imgIndex < newShoppingCart[indexOfItem].gallery.length - 1) {
+      newShoppingCart[indexOfItem].thumbnail =
+        newShoppingCart[indexOfItem].gallery[imgIndex + 1];
+    }
+    imgIndex = newShoppingCart[indexOfItem].gallery.indexOf(
+      newShoppingCart[indexOfItem].thumbnail
+    );
+    if (imgIndex === newShoppingCart[indexOfItem].gallery.length - 1) {
+      let newObj = { ...this.state };
+      newObj.showRightArrow = false;
+      this.setState(newObj);
+    }
+    this.setState({ shoppingCart: newShoppingCart });
+  };
+
+  prevImg = (item) => {
+    this.setState({ showRightArrow: true });
+    let newShoppingCart = [...this.state.shoppingCart];
+    let indexOfItem = newShoppingCart.indexOf(item);
+    let imgIndex = newShoppingCart[indexOfItem].gallery.indexOf(
+      newShoppingCart[indexOfItem].thumbnail
+    );
+    if (imgIndex > 0) {
+      newShoppingCart[indexOfItem].thumbnail =
+        newShoppingCart[indexOfItem].gallery[imgIndex - 1];
+    }
+    imgIndex = newShoppingCart[indexOfItem].gallery.indexOf(
+      newShoppingCart[indexOfItem].thumbnail
+    );
+    if (imgIndex === 0) {
+      let newObj = { ...this.state };
+      newObj.showLeftArrow = false;
+      this.setState(newObj);
+    }
+    this.setState({ shoppingCart: newShoppingCart });
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -201,6 +254,8 @@ export class App extends Component {
             totallProducts: this.state.totallProducts,
             cartModal: this.state.cartModal,
             totalPrice: this.state.totalPrice,
+            showRightArrow: this.state.showRightArrow,
+            showLeftArrow: this.state.showLeftArrow,
             showCartModal: this.showCartModal,
             changeCurrency: this.changeCurrency,
             showCurrencyModal: this.showCurrencyModal,
@@ -211,6 +266,8 @@ export class App extends Component {
             handleCounterIncreament: this.handleCounterIncreament,
             handleCounterDecreament: this.handleCounterDecreament,
             calcTotalPrice: this.calcTotalPrice,
+            nextImg: this.nextImg,
+            prevImg: this.prevImg,
           }}
         >
           <CustomRoutes />

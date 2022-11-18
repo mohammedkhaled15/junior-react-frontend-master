@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import leftArrow from "../../assets/leftArrow.svg"
+import rightArrow from "../../assets/rightArrow.svg"
 
 export default class CartContent extends Component {
   render() {
     return (
       <div className='cartmodal__content'>
         {this.props.shoppingCart.map((item, index) => {
-          console.log(item)
+          // console.log(item)
           return (
             <div key={item.id + `${index}`} className='cartmodal__content__item' style={this.props.view === "shoppingCart" ? { justifyContent: "space-between" } : null}>
               <div className='cartmodal__content__item-details' style={this.props.view === "shoppingCart" ? { width: "30%" } : null}>
@@ -55,6 +57,10 @@ export default class CartContent extends Component {
               </div>
               <div className='cartmodal__content__item-image' style={this.props.view === "shoppingCart" ? { width: "22%", flex: "unset" } : null}>
                 <img src={item.thumbnail} alt="preview" />
+                {this.props.view === "shoppingCart" && item.gallery.length !== 1 && <div className='image-arrows'>
+                  {this.props.showLeftArrow && <img src={leftArrow} alt="left" onClick={() => this.props.prevImg(item)} />}
+                  {this.props.showRightArrow && <img src={rightArrow} alt="right" onClick={() => this.props.nextImg(item)} />}
+                </div>}
               </div>
             </div>
           )

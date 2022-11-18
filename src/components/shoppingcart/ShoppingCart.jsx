@@ -7,7 +7,7 @@ export default class ShoppingCart extends Component {
     return (
       <AppConsumer>
         {
-          ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency }) => {
+          ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency, nextImg, prevImg, showRightArrow, showLeftArrow }) => {
             return (
               <section className='shoppingcart'>
                 <h1>Cart</h1>
@@ -15,7 +15,7 @@ export default class ShoppingCart extends Component {
                 <CartContent
                   shoppingCart={shoppingCart} currency={currency}
                   handleCounterIncreament={handleCounterIncreament} handleCounterDecreament={handleCounterDecreament} totallProducts={totallProducts} totalPrice={totalPrice} hideAnyModal={hideAnyModal}
-                  view={"shoppingCart"} />
+                  view={"shoppingCart"} nextImg={nextImg} showRightArrow={showRightArrow} showLeftArrow={showLeftArrow} prevImg={prevImg} />
 
               </section>
             )

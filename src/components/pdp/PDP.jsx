@@ -51,7 +51,7 @@ class PDP extends Component {
     return (
       <AppConsumer>
         {
-          ({ addAttrToProduct, predictedProduct, addToCart, ...rest }) => {
+          ({ addAttrToProduct, predictedProduct, addToCart }) => {
             return (
               <section className='PDP'>
                 <Query query={GET_PRODUCT_DETAILS(this.state.productId)}>
@@ -114,7 +114,8 @@ class PDP extends Component {
                                 </h3>
                                 <button
                                   onClick={addToCart}
-                                  className='add-to-cart'>ADD to Cart</button>
+                                  style={!this.state.productObject.inStock ? { pointerEvents: "none", backgroundColor: "#606e64" } : null}
+                                  className='add-to-cart'>{!this.state.productObject.inStock ? "Out Of Stock" : "ADD to Cart"}</button>
                                 <div className='description'>{parse(this.state.productObject.description)}</div>
                               </div>
                             </div>

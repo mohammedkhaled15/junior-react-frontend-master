@@ -1,6 +1,6 @@
 //libraries components
 import { Component } from "react";
-import { BrowserRouter, json } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 //css file
 import "./App.css";
 //custom components

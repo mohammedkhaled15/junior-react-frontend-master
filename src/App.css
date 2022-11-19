@@ -503,7 +503,7 @@
   bottom: 0;
   right: 0;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   width: 56px;
   gap: 8px;
 }

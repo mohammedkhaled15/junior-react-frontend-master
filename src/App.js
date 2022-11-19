@@ -67,7 +67,6 @@ export class App extends Component {
       let filteredNewShoppingCart = newShoppingCart.filter(
         (product) => product.count !== 0
       );
-      console.log(filteredNewShoppingCart);
       this.setState({ shoppingCart: filteredNewShoppingCart }, () => {
         this.calcTotallProducts();
         this.checkProductExistance();
@@ -90,6 +89,7 @@ export class App extends Component {
   hideAnyModal = (e) => {
     this.setState({ currencyModal: false, cartModal: false });
     e.stopPropagation();
+    // e.preventDefault();
   };
 
   changeCurrency = (currency, symbol) => {

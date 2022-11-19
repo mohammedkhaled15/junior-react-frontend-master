@@ -18,7 +18,7 @@ export class PLP extends Component {
               { //Query component to fetch graphql data
                 ({ loading, error, data }) => {
                   if (error) return "";
-                  if (loading || !data) return <div class="lds-dual-ring"></div>;
+                  if (loading || !data) return <div className="lds-dual-ring"></div>;
                   return (
                     data.category.products.map((product) => {
                       //function to extract the price depending on product and choosen currency

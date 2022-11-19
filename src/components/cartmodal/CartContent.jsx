@@ -78,8 +78,8 @@ export default class CartContent extends Component {
           </div>}
         {this.props.totallProducts > 0 && this.props.view === "cartModal" &&
           <div className='cartmodal__content__buttons'>
-            <Link to="shoppingcart">
-              <button onClick={(e) => { this.props.hideAnyModal(); e.preventDefault() }} className='cartmodal__content__buttons__viewbag'>View Bag</button>
+            <Link to="shoppingcart" onClick={(e) => { this.props.hideAnyModal(e) }}>
+              <div className='cartmodal__content__buttons__viewbag'>View Bag</div>
             </Link>
             <button className='cartmodal__content__buttons__checkout'>Check Out</button>
           </div>}

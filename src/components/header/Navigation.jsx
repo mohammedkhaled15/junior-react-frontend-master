@@ -12,7 +12,7 @@ export class Navigation extends Component {
         {
           ({ loading, error, data }) => {
             if (error) return <h1>Error...</h1>;
-            if (loading || !data) return <div class="lds-dual-ring"></div>;
+            if (loading || !data) return <div className="lds-dual-ring"></div>;
             return <div className='navigation'>{data.categories.map((category) => {
               return (
                 <NavLink key={category.name} to={`${category.name.toLocaleLowerCase()}`} className={({ isActive }) => isActive ? "active link" : "link"}>

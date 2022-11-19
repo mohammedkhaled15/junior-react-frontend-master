@@ -57,7 +57,7 @@ class PDP extends Component {
                   {
                     ({ loading, error, data }) => {
                       if (error) return "";
-                      if (loading || !data) return <div class="lds-dual-ring"></div>;
+                      if (loading || !data) return <div className="lds-dual-ring"></div>;
                       return (
                         <>
                           <aside className='PDP__aside'>

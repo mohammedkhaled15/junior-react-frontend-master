@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+//import custom components
 import Actions from './Actions'
-import Logo from './Logo'
 import Navigation from "./Navigation"
+import Logo from './Logo'
 
 
 export class Header extends Component {

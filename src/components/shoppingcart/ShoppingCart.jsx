@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+//import custom components
 import CartContent from '../cartmodal/CartContent'
+//import context
 import { AppConsumer } from '../context/appContext'
 
 export default class ShoppingCart extends Component {
@@ -7,7 +9,7 @@ export default class ShoppingCart extends Component {
     return (
       <AppConsumer>
         {
-          ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency, nextImg, prevImg, showRightArrow, showLeftArrow }) => {
+          ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency, nextImg, prevImg, showRightArrow, showLeftArrow, handleOrdering }) => {
 
             let usedCurrencySymbol = shoppingCart[shoppingCart.length - 1]?.prices?.filter(price => price.currency.label === currency)[0].currency.symbol
 
@@ -22,7 +24,9 @@ export default class ShoppingCart extends Component {
                   shoppingCart={shoppingCart} currency={currency}
                   handleCounterIncreament={handleCounterIncreament} handleCounterDecreament={handleCounterDecreament} totallProducts={totallProducts} totalPrice={totalPrice} hideAnyModal={hideAnyModal}
                   view={"shoppingCart"} nextImg={nextImg} showRightArrow={showRightArrow} showLeftArrow={showLeftArrow} prevImg={prevImg} />
+
                 {totallProducts === 0 && <div style={{ display: "flex", justifyContent: "center", alignItem: "center", fontSize: "40px", fontWeight: "700" }}><h2>There is No Items In Your Cart</h2></div>}
+
                 {totallProducts !== 0 &&
                   <div className='shoppingcart__summary'>
                     <table style={{ marginBottom: "16px" }}>
@@ -41,7 +45,7 @@ export default class ShoppingCart extends Component {
                         </tr>
                       </tbody>
                     </table>
-                    <button className='order'>ORDER</button>
+                    <button onClick={handleOrdering} className='order'>ORDER</button>
                   </div>}
               </section>
             )

@@ -194,7 +194,6 @@
   margin-inline: auto;
   margin-top: 80px;
   height: calc(100vh - 80px);
-  /* background-color: #eeeeee; */
   display: flex;
   flex-direction: row;
 }
@@ -288,14 +287,6 @@
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-/* .attr__items span {
-  width: "24px";
-  height: "24px";
-  font-size: "14px";
-  font-weight: "400";
-  margin-bottom: "8px";
-  pointer-events: "none";
-} */
 .attr__value {
   min-width: fit-content;
   height: 36px;
@@ -531,4 +522,30 @@
   cursor: pointer;
   margin-bottom: 40px;
   letter-spacing: 2px;
+}
+/******************Spinner********************/
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid rgb(13, 46, 8);
+  border-color: #5ece7b transparent #5ece7b transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

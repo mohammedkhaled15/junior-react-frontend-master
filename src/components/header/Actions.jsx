@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+//import svgs
 import downArrow from "../../assets/downArrow.svg"
 import cart from "../../assets/cart.svg"
+//import context
 import { AppConsumer } from '../context/appContext'
+// import required query tools
 import { Query } from '@apollo/client/react/components'
 import { GET_CURRENCY_DATA } from '../../gql/Query'
+// import custom components
 import CartModal from '../cartmodal/CartModal'
 
 

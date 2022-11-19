@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+//import svg
 import logo from "../../assets/logo.svg"
 
 export class Logo extends Component {

@@ -3,8 +3,8 @@ import { Component } from "react";
 import { Query } from '@apollo/client/react/components';
 import { Navigate, Route, Routes } from "react-router-dom"
 //Components
-import PLP from "../components/PLP";
-import SharedLayout from "../components/SharedLayout";
+import PLP from "../components/plp/PLP";
+import SharedLayout from "../components/sharedlayout/SharedLayout";
 import ShoppingCart from "../components/shoppingcart/ShoppingCart";
 //context
 import { AppConsumer } from "../components/context/appContext";
@@ -47,7 +47,7 @@ export class CustomRoutes extends Component {
                           })
                         }
                         <Route path="/shoppingcart" element={<ShoppingCart />} />
-                        <Route path="/*" element={<h1 style={{ fontSize: "200px", marginTop: "200px" }}>404 Error</h1>} />
+                        <Route path="/*" element={<h1 style={{ fontSize: "200px", marginTop: "200px", textAlign: "center" }}>404 Error</h1>} />
                       </Route>
                     </Routes>
                   )
@@ -60,6 +60,5 @@ export class CustomRoutes extends Component {
     )
   }
 }
-
 
 export default CustomRoutes

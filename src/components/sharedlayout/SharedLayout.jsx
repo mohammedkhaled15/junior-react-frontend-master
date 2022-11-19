@@ -2,9 +2,9 @@
 import React, { Component } from 'react'
 import { Outlet } from 'react-router-dom'
 //conntext
-import { AppConsumer } from './context/appContext'
+import { AppConsumer } from '../context/appContext'
 //component
-import Header from './header/Header'
+import Header from '../header/Header'
 
 export class SharedLayout extends Component {
   render() {

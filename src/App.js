@@ -1,6 +1,6 @@
 //libraries components
 import { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, json } from "react-router-dom";
 //css file
 import "./App.css";
 //custom components
@@ -26,6 +26,11 @@ export class App extends Component {
       showLeftArrow: false,
     };
   }
+  componentDidMount() {
+    if (window.sessionStorage.getItem("myAppState")) {
+      this.setState(JSON.parse(window.sessionStorage.getItem("myAppState")));
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -40,6 +45,7 @@ export class App extends Component {
     ) {
       this.checkProductExistance();
     }
+    window.sessionStorage.setItem("myAppState", JSON.stringify(this.state));
   }
 
   handleCounterIncreament = (item) => {
@@ -157,7 +163,6 @@ export class App extends Component {
   addToCart = () => {
     if (this.state.productExistBol) {
       let copyOfshoppingCart = [...this.state.shoppingCart];
-      // console.log(copyOfshoppingCart);
       copyOfshoppingCart[this.state.productExistIndex].count++;
       this.setState({ shoppingCart: copyOfshoppingCart }, () =>
         this.calcTotallProducts()
@@ -241,6 +246,11 @@ export class App extends Component {
     this.setState({ shoppingCart: newShoppingCart });
   };
 
+  handleOrdering = () => {
+    window.sessionStorage.clear();
+    this.setState({ shoppingCart: [], totalPrice: 0, totallProducts: 0 });
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -268,6 +278,7 @@ export class App extends Component {
             calcTotalPrice: this.calcTotalPrice,
             nextImg: this.nextImg,
             prevImg: this.prevImg,
+            handleOrdering: this.handleOrdering,
           }}
         >
           <CustomRoutes />

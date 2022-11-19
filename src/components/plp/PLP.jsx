@@ -3,9 +3,8 @@ import React, { Component } from 'react'
 import { Query } from '@apollo/client/react/components'
 import { Link } from 'react-router-dom'
 //queries
-import { GET_PRODUCTS_FOR_CATEGORY } from "../gql/Query"
+import { GET_PRODUCTS_FOR_CATEGORY } from "../../gql/Query"
 import { Outlet } from 'react-router-dom'
-
 
 export class PLP extends Component {
   render() {
@@ -19,7 +18,7 @@ export class PLP extends Component {
               { //Query component to fetch graphql data
                 ({ loading, error, data }) => {
                   if (error) return "";
-                  if (loading || !data) return "";
+                  if (loading || !data) return <div class="lds-dual-ring"></div>;
                   return (
                     data.category.products.map((product) => {
                       //function to extract the price depending on product and choosen currency
@@ -49,7 +48,6 @@ export class PLP extends Component {
                         </Link>
                       )
                     })
-
                   )
                 }
               }
@@ -58,11 +56,8 @@ export class PLP extends Component {
         </div >
         <Outlet />
       </>
-
     )
   }
 }
 
 export default PLP
-
-// style={!product.inStock ? { pointerEvents: "none" } : null}

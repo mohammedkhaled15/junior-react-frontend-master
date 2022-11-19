@@ -8,7 +8,6 @@ import withRouter from '../HOC/withRouter'
 import { GET_PRODUCT_DETAILS } from '../../gql/Query'
 import { AppConsumer } from '../context/appContext';
 
-
 class PDP extends Component {
 
   constructor(props) {
@@ -35,7 +34,7 @@ class PDP extends Component {
     let priceObject = productObject.prices.filter(price => price.currency.label === this.props.currency)
     //setting currrency = to props currency
     let currency = this.props.currency
-    //setting the state wih the new values and setting predict product with new product as acaalback function 
+    //setting the state wih the new values and setting predict product with new product as a callback function 
     this.setState({ categoryName, productId, productObject, heroImg: imgUrl, currency, priceObject }, () => this.props.settingNewPredictedProduct(this.state.productObject, this.state.priceObject[0]))
   }
 
@@ -58,7 +57,7 @@ class PDP extends Component {
                   {
                     ({ loading, error, data }) => {
                       if (error) return "";
-                      if (loading || !data) return "";
+                      if (loading || !data) return <div class="lds-dual-ring"></div>;
                       return (
                         <>
                           <aside className='PDP__aside'>

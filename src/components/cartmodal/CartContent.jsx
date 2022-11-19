@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+// import components from libraries
 import { Link } from 'react-router-dom'
+//import required svgs
 import leftArrow from "../../assets/leftArrow.svg"
 import rightArrow from "../../assets/rightArrow.svg"
 
@@ -8,7 +10,6 @@ export default class CartContent extends Component {
     return (
       <div className='cartmodal__content'>
         {this.props.shoppingCart.map((item, index) => {
-          // console.log(item)
           return (
             <div key={item.id + `${index}`} className='cartmodal__content__item' style={this.props.view === "shoppingCart" ? { justifyContent: "space-between" } : null}>
               <div className='cartmodal__content__item-details' style={this.props.view === "shoppingCart" ? { width: "30%" } : null}>

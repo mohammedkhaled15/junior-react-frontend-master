@@ -162,6 +162,26 @@
 .PLP__content__card img {
   width: 100%;
   height: 250px;
+  position: relative;
+  object-fit: cover;
+  object-position: top;
+}
+.PLP__content__card .brought-product {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  background-color: #5ece7b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  bottom: 20%;
+  right: 10%;
+}
+.PLP__content__card .brought-product img {
+  fill: #fff;
+  max-width: 60%;
+  max-height: 60%;
 }
 .PLP__content__card__desc {
   display: flex;
@@ -337,6 +357,9 @@
   cursor: pointer;
   margin-bottom: 40px;
 }
+.add-to-cart:active {
+  background-color: #316b40;
+}
 .description {
   font-weight: 400;
   font-size: 1rem;
@@ -455,6 +478,10 @@
   font-size: 14px;
   cursor: pointer;
 }
+.cartmodal__content__buttons__viewbag:active {
+  background-color: black;
+  color: #fff;
+}
 .cartmodal__content__buttons__checkout {
   width: 50%;
   background-color: #5ece7b;
@@ -526,6 +553,10 @@
   cursor: pointer;
   margin-bottom: 40px;
   letter-spacing: 2px;
+  transition: 0.1 all;
+}
+.order:active {
+  background-color: #275a35;
 }
 /******************Spinner********************/
 .lds-dual-ring {

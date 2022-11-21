@@ -89,7 +89,6 @@ export class App extends Component {
   hideAnyModal = (e) => {
     this.setState({ currencyModal: false, cartModal: false });
     e.stopPropagation();
-    // e.preventDefault();
   };
 
   changeCurrency = (currency, symbol) => {

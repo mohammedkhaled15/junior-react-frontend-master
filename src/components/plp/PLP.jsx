@@ -19,7 +19,6 @@ export class PLP extends Component {
       <AppConsumer>
         {
           ({ shoppingCart }) => {
-            console.log(shoppingCart)
             return (
               <>
                 <div className={styles.plp}>

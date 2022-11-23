@@ -151,3 +151,14 @@
 .imageArrows img {
   cursor: pointer;
 }
+.plus:hover,
+.minus:hover {
+  background-color: #1d1f22;
+  color: #fff;
+}
+.plus:active,
+.minus:active {
+  background-color: #1d1f22;
+  color: #fff;
+  transform: scale(0.9);
+}

@@ -22,8 +22,6 @@ export class App extends Component {
       productExistIndex: -1,
       cartModal: false,
       totalPrice: 0,
-      showRightArrow: true,
-      showLeftArrow: false,
     };
   }
   componentDidMount() {
@@ -109,6 +107,8 @@ export class App extends Component {
     newObj.count = 1;
     newObj.thumbnail = product.gallery[0];
     newObj.gallery = product.gallery;
+    newObj.showRightArrow = true;
+    newObj.showLeftArrow = false;
     // setting default values to each product
     product.attributes.map((attr) => {
       return (newObj[attr.name] =
@@ -202,7 +202,6 @@ export class App extends Component {
   };
 
   nextImg = (item) => {
-    this.setState({ showLeftArrow: true });
     let newShoppingCart = [...this.state.shoppingCart];
     let indexOfItem = newShoppingCart.indexOf(item);
     let imgIndex = newShoppingCart[indexOfItem].gallery.indexOf(
@@ -216,15 +215,13 @@ export class App extends Component {
       newShoppingCart[indexOfItem].thumbnail
     );
     if (imgIndex === newShoppingCart[indexOfItem].gallery.length - 1) {
-      let newObj = { ...this.state };
-      newObj.showRightArrow = false;
-      this.setState(newObj);
+      newShoppingCart[indexOfItem].showRightArrow = false;
     }
+    newShoppingCart[indexOfItem].showLeftArrow = true;
     this.setState({ shoppingCart: newShoppingCart });
   };
 
   prevImg = (item) => {
-    this.setState({ showRightArrow: true });
     let newShoppingCart = [...this.state.shoppingCart];
     let indexOfItem = newShoppingCart.indexOf(item);
     let imgIndex = newShoppingCart[indexOfItem].gallery.indexOf(
@@ -238,10 +235,9 @@ export class App extends Component {
       newShoppingCart[indexOfItem].thumbnail
     );
     if (imgIndex === 0) {
-      let newObj = { ...this.state };
-      newObj.showLeftArrow = false;
-      this.setState(newObj);
+      newShoppingCart[indexOfItem].showLeftArrow = false;
     }
+    newShoppingCart[indexOfItem].showRightArrow = true;
     this.setState({ shoppingCart: newShoppingCart });
   };
 

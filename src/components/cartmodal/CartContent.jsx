@@ -54,16 +54,16 @@ export default class CartContent extends Component {
                 }
               </div>
               <div className={styles.counter} style={this.props.view === "shoppingCart" ? { width: "5%", flex: "1", placeItems: "end" } : null}>
-                <span style={this.props.view === "shoppingCart" ? { width: "45px", height: "45px", fontSize: "36px" } : null} onClick={() => this.props.handleCounterIncreament(item)}>+</span>
+                <span className={styles.plus} style={this.props.view === "shoppingCart" ? { width: "45px", height: "45px", fontSize: "36px" } : null} onClick={() => this.props.handleCounterIncreament(item)}>+</span>
                 <span style={this.props.view === "cartModal" ? { fontWeigth: "500", fontSize: "16px", textAlign: "center" } : { fontWeigth: "500", fontSize: "24px", textAlign: "center", width: "45px", height: "45px" }}>{item.count}</span>
-                <span style={this.props.view === "shoppingCart" ? { width: "45px", height: "45px", fontSize: "36px" } : null} onClick={() => this.props.handleCounterDecreament(item)}>-</span>
+                <span className={styles.minus} style={this.props.view === "shoppingCart" ? { width: "45px", height: "45px", fontSize: "36px" } : null} onClick={() => this.props.handleCounterDecreament(item)}>-</span>
               </div>
               <div className={styles.image} style={this.props.view === "shoppingCart" ? { width: "22%", flex: "unset" } : null}>
                 <img src={item.thumbnail} alt="preview" />
                 {this.props.view === "shoppingCart" && item.gallery.length !== 1 &&
-                  <div className={styles.imageArrows} style={this.props.showRightArrow && !this.props.showLeftArrow ? { justifyContent: "end" } : null}>
-                    {this.props.showLeftArrow && <img src={leftArrow} alt="left" onClick={() => this.props.prevImg(item)} />}
-                    {this.props.showRightArrow && <img src={rightArrow} alt="right" onClick={() => this.props.nextImg(item)} />}
+                  <div className={styles.imageArrows} style={item.showRightArrow && !item.showLeftArrow ? { justifyContent: "end" } : null}>
+                    {item.showLeftArrow && <img src={leftArrow} alt="left" onClick={() => this.props.prevImg(item)} />}
+                    {item.showRightArrow && <img src={rightArrow} alt="right" onClick={() => this.props.nextImg(item)} />}
                   </div>}
               </div>
               {this.props.view === "shoppingCart" &&

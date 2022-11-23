@@ -1,0 +1,153 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 32px;
+}
+.details {
+  width: 45%;
+}
+.counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+}
+.counter span {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.counter span:is(:first-child, :last-child) {
+  border: 1px solid black;
+}
+.image {
+  flex: 1;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.image img {
+  max-width: 100%;
+  max-height: 100%;
+  align-self: stretch;
+  object-fit: contain;
+}
+.total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+}
+.buttons button {
+  padding: 16px 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+.viewbag {
+  width: 100%;
+  border: 1px solid #1d1f22;
+  background-color: #ffff;
+  color: rgba(29, 31, 34, 1);
+  padding: 16px 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+.viewbag:active {
+  background-color: black;
+  color: #fff;
+}
+.checkout {
+  width: 50%;
+  background-color: #5ece7b;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+.attrtitle {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 0.5rem;
+}
+.attritems {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.attrvalue {
+  min-width: fit-content;
+  height: 36px;
+  border: 1px solid #1d1f22;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.attrvalue:hover {
+  background-color: #1d1f22;
+  color: #fff;
+}
+.attrvalue.active {
+  background-color: #1d1f22;
+  color: #fff;
+}
+.attrvaluecolor {
+  transition: all 0.1s;
+  margin-bottom: 8px;
+}
+.attrvaluecolor:hover,
+.attrvaluecolor.active {
+  border: 2px solid #fff;
+  outline: 1px solid #5ece7b;
+  box-shadow: 0px 0px 5px 3px #5ece7b;
+}
+.imageArrows {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-start;
+  width: 56px;
+  gap: 8px;
+}
+.imageArrows img {
+  cursor: pointer;
+}

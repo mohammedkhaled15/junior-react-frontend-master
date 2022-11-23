@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';
 //queries
 import { GET_CATEGORY_NAME } from "../../gql/Query"
+//import css styles
+import styles from "./Navigation.module.css"
 
 export class Navigation extends Component {
   render() {
@@ -12,10 +14,10 @@ export class Navigation extends Component {
         {
           ({ loading, error, data }) => {
             if (error) return <h1>Error...</h1>;
-            if (loading || !data) return <div className="lds-dual-ring"></div>;
-            return <div className='navigation'>{data.categories.map((category) => {
+            if (loading || !data) return <div className={styles.ldsDualRing}></div>;
+            return <div className={styles.navigation}>{data.categories.map((category) => {
               return (
-                <NavLink key={category.name} to={`${category.name.toLocaleLowerCase()}`} className={({ isActive }) => isActive ? "active link" : "link"}>
+                <NavLink key={category.name} to={`${category.name.toLocaleLowerCase()}`} className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : `${styles.link}`}>
                   <h2 >{category.name}</h2>
                 </NavLink>
               )

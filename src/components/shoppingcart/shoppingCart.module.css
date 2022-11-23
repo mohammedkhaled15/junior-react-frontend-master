@@ -1,0 +1,43 @@
+.shoppingcart {
+  width: 80%;
+  margin-inline: auto;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+.shoppingcart > h1::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: calc(100% + 55px);
+  left: 0;
+  height: 1px;
+  background-color: rgba(229, 229, 229, 1);
+}
+.shoppingcart h1 {
+  margin-top: 80px;
+  font-size: 32px;
+  font-weight: 700;
+}
+.summary {
+  width: 20%;
+}
+.order {
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  padding: 16px 32px;
+  background-color: #5ece7b;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  transition: 0.1 all;
+}
+.order:active {
+  background-color: #275a35;
+}

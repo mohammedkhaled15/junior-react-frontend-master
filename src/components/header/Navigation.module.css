@@ -1,0 +1,61 @@
+.ldsDualRing {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+}
+.ldsDualRing:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid rgb(13, 46, 8);
+  border-color: #5ece7b transparent #5ece7b transparent;
+  animation: ldsDualRing 1.2s linear infinite;
+}
+@keyframes ldsDualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.navigation {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+}
+.link {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  position: relative;
+  text-decoration: none;
+  color: black;
+  transition: 0.3s all;
+}
+.link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #5ece7b;
+  left: 0;
+  top: 250%;
+  transition: 0.2s all;
+}
+.link:hover::after {
+  width: 100%;
+}
+.link.active {
+  color: #5ece7b;
+}
+.link.active::after {
+  width: 100%;
+}

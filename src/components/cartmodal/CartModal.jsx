@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { AppConsumer } from '../context/appContext'
 //import required components
 import CartContent from './CartContent'
+//import css styles
+import styles from "./CartModal.module.css"
 
 export default class CartModal extends Component {
   render() {
@@ -11,11 +13,11 @@ export default class CartModal extends Component {
         {
           ({ shoppingCart, totallProducts, handleCounterIncreament, handleCounterDecreament, hideAnyModal, totalPrice, currency }) => {
             return (
-              <div className='backdrop' onClick={(e) => hideAnyModal(e)}>
-                <div className='cartmodal' onClick={e => e.stopPropagation()}>
-                  <h2 className='cartmodal__title'>
+              <div className={styles.backdrop} onClick={(e) => hideAnyModal(e)}>
+                <div className={styles.cartmodal} onClick={e => e.stopPropagation()}>
+                  <h2 className={styles.cartmodalTitle}>
                     My Bag,
-                    <span className='cartmodal__title-span'>
+                    <span className={styles.span}>
                       {totallProducts === 0 ? "" : totallProducts} {totallProducts === 0 ? "No Items" : totallProducts === 1 ? "item" : "items"}
                     </span>
                   </h2>

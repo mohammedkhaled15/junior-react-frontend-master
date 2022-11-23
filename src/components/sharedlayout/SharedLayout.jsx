@@ -13,7 +13,7 @@ export class SharedLayout extends Component {
         {
           (value) => {
             return (
-              <div className='main' onClick={value.currencyModal ? value.hideAnyModal : null}>
+              <div onClick={value.currencyModal ? value.hideAnyModal : null}>
                 <Header />
                 <Outlet />
               </div>

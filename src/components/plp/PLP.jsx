@@ -9,6 +9,8 @@ import { Outlet } from 'react-router-dom'
 import cart from "../../assets/whiteCart.svg"
 //import context
 import { AppConsumer } from '../context/appContext'
+//import css styles
+import styles from "./Plp.module.css"
 
 export class PLP extends Component {
   render() {
@@ -20,14 +22,14 @@ export class PLP extends Component {
             console.log(shoppingCart)
             return (
               <>
-                <div className='PLP'>
-                  < h1 className='PLP__title'> {this.props.category}</h1 >
-                  <div className='PLP__content'>
+                <div className={styles.plp}>
+                  < h1 className={styles.title}> {this.props.category}</h1 >
+                  <div className={styles.content}>
                     <Query query={GET_PRODUCTS_FOR_CATEGORY(this.props.category)}>
                       { //Query component to fetch graphql data
                         ({ loading, error, data }) => {
                           if (error) return "";
-                          if (loading || !data) return <div className="lds-dual-ring"></div>;
+                          if (loading || !data) return <div className={styles.ldsDualRing}></div>;
                           return (
                             data.category.products.map((product) => {
                               //function to extract the price depending on product and choosen currency
@@ -43,13 +45,13 @@ export class PLP extends Component {
                               const { symbol, price } = getPriceForCurrency(currency)
                               // console.log(this.props.category)
                               return (
-                                <Link key={product.id} to={`${product.id}`} className='PLP__content__card'>
+                                <Link key={product.id} to={`${product.id}`} className={styles.card}>
                                   <img src={product.gallery[0]} alt="product" />
                                   {shoppingCart.filter((prod) => prod.id === product.id).length !== 0 &&
-                                    <div className='brought-product'>
+                                    <div className={styles.broughtProduct}>
                                       <img src={cart} alt="brought" />
                                     </div>}
-                                  <div className='PLP__content__card__desc'>
+                                  <div className={styles.desc}>
                                     <div style={{ width: "100%", display: "flex", justifyContent: "space-around" }}>
                                       <span>{product.name}</span>
                                       <span>{product.brand}</span>
@@ -57,7 +59,7 @@ export class PLP extends Component {
                                     <span style={{ color: "black", fontWeight: "500" }}>{symbol} {price}</span>
                                   </div>
                                   {/* Adding overlay depending on inStock value */}
-                                  {!product.inStock && <div className='PLP__content__card__overlay'>Out Of Stock</div>}
+                                  {!product.inStock && <div className={styles.overlay}>Out Of Stock</div>}
                                 </Link>
                               )
                             })

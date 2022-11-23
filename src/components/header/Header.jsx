@@ -3,13 +3,15 @@ import React, { Component } from 'react'
 import Actions from './Actions'
 import Navigation from "./Navigation"
 import Logo from './Logo'
+// import styles css
+import styles from "./Header.module.css"
 
 
 export class Header extends Component {
     render() {
         return (
-            <div className='header'>
-                <div className='header__content'>
+            <div className={styles.header}>
+                <div className={styles.content}>
                     <Navigation />
                     <Logo />
                     <Actions />

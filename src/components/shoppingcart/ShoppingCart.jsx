@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import CartContent from '../cartmodal/CartContent'
 //import context
 import { AppConsumer } from '../context/appContext'
+//import css styles
+import styles from "./shoppingCart.module.css"
 
 export default class ShoppingCart extends Component {
   render() {
@@ -17,7 +19,7 @@ export default class ShoppingCart extends Component {
             let dataStyle = { fontWeight: "700", fontSize: "24px" }
 
             return (
-              <section className='shoppingcart'>
+              <section className={styles.shoppingcart}>
                 <h1 style={{ marginBottom: "55px", position: "relative" }}>Cart</h1>
 
                 <CartContent
@@ -28,7 +30,7 @@ export default class ShoppingCart extends Component {
                 {totallProducts === 0 && <div style={{ display: "flex", justifyContent: "center", alignItem: "center", fontSize: "40px", fontWeight: "700" }}><h2>There is No Items In Your Cart</h2></div>}
 
                 {totallProducts !== 0 &&
-                  <div className='shoppingcart__summary'>
+                  <div className={styles.summary}>
                     <table style={{ marginBottom: "16px" }}>
                       <tbody>
                         <tr>
@@ -45,7 +47,7 @@ export default class ShoppingCart extends Component {
                         </tr>
                       </tbody>
                     </table>
-                    <button onClick={handleOrdering} className='order'>ORDER</button>
+                    <button onClick={handleOrdering} className={styles.order}>ORDER</button>
                   </div>}
               </section>
             )

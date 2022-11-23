@@ -1,0 +1,181 @@
+.pdp {
+  width: 80%;
+  margin-inline: auto;
+  margin-top: 80px;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: row;
+}
+.aside {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+  overflow-y: scroll;
+  padding: 1rem;
+  padding-bottom: 0;
+  scrollbar-width: none;
+}
+.aside::-webkit-scrollbar {
+  display: none;
+}
+.imgContainer {
+  width: 80px;
+  cursor: pointer;
+}
+.imgContainer img {
+  max-width: 100px;
+}
+.imgContainer img.activePic {
+  border: 1px solid #5ece7b;
+  box-shadow: 0px 0px 5px 2px #5ece7b;
+}
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+}
+.heroImage {
+  width: 550px;
+  max-height: 600px;
+}
+.heroImage img {
+  object-fit: contain;
+  width: 550px;
+  height: calc(100vh - 80px);
+}
+.details {
+  width: 44%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.6rem;
+  overflow-y: scroll;
+  height: calc(100vh - 80px);
+  scrollbar-width: none;
+}
+.details::-webkit-scrollbar {
+  display: none;
+}
+.brand {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: rgba(29, 31, 34, 1);
+  margin-bottom: 16px;
+}
+.name {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  color: rgba(29, 31, 34, 1);
+  margin-bottom: 40px;
+}
+.attrs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.attrtitle {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 0.5rem;
+}
+.attritems {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.attrvalue {
+  min-width: fit-content;
+  height: 36px;
+  border: 1px solid #1d1f22;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.attrvalue:hover {
+  background-color: #1d1f22;
+  color: #fff;
+}
+.attrvalue.active {
+  background-color: #1d1f22;
+  color: #fff;
+}
+.attrvaluecolor {
+  transition: all 0.1s;
+  margin-bottom: 8px;
+}
+.attrvaluecolor:hover,
+.attrvaluecolor.active {
+  border: 2px solid #fff;
+  outline: 1px solid #5ece7b;
+  box-shadow: 0px 0px 5px 3px #5ece7b;
+}
+.attrPrice {
+  font-weight: 700;
+  font-size: 24px;
+  color: rgba(29, 31, 34, 1);
+  margin-bottom: 24px;
+}
+.addToCart {
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  padding: 16px 32px;
+  background-color: #5ece7b;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+.add-to-cart:active {
+  background-color: #316b40;
+}
+.description {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #1d1f22;
+  text-align: justify;
+}
+.ldsDualRing {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+}
+.ldsDualRing:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid rgb(13, 46, 8);
+  border-color: #5ece7b transparent #5ece7b transparent;
+  animation: ldsDualRing 1.2s linear infinite;
+}
+@keyframes ldsDualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

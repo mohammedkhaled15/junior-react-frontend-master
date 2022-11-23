@@ -7,6 +7,8 @@ import withRouter from '../HOC/withRouter'
 //import queries
 import { GET_PRODUCT_DETAILS } from '../../gql/Query'
 import { AppConsumer } from '../context/appContext';
+//import css styles
+import styles from "./Pdp.module.css"
 
 class PDP extends Component {
 
@@ -52,52 +54,52 @@ class PDP extends Component {
         {
           ({ addAttrToProduct, predictedProduct, addToCart }) => {
             return (
-              <section className='PDP'>
+              <section className={styles.pdp}>
                 <Query query={GET_PRODUCT_DETAILS(this.state.productId)}>
                   {
                     ({ loading, error, data }) => {
                       if (error) return "";
-                      if (loading || !data) return <div className="lds-dual-ring"></div>;
+                      if (loading || !data) return <div className={styles.ldsDualRing}></div>;
                       return (
                         <>
-                          <aside className='PDP__aside'>
+                          <aside className={styles.aside}>
                             {data.product.gallery.map(image => {
                               return (
                                 <div
                                   key={image}
                                   onClick={() => this.setState({ ...this.state, heroImg: image })}
-                                  className={`${this.state.heroImg === image ? "active-pic" : null} PDP__aside__img-container`}>
+                                  className={`${this.state.heroImg === image ? `${styles.activePic}` : null} ${styles.imgContainer}`}>
                                   <img
-                                    src={image} alt="Detailed-pic" className={`${this.state.heroImg === image ? "active-pic" : null}`} />
+                                    src={image} alt="Detailed-pic" className={`${this.state.heroImg === image ? `${styles.activePic}` : null}`} />
                                 </div>
                               )
                             })}
                           </aside>
-                          <main className='PDP__main'>
-                            <div className='PDP__hero-image'>
+                          <main className={styles.main}>
+                            <div className={styles.heroImage}>
                               <img src={this.state.heroImg} alt="main-view" />
                             </div>
-                            <div className='PDP__main__details'>
-                              <h2 className='brand'>{this.state.productObject.brand}</h2>
-                              <h2 className='name'>{this.state.productObject.name}</h2>
-                              <div className='attrs'>
+                            <div className={styles.details}>
+                              <h2 className={styles.brand}>{this.state.productObject.brand}</h2>
+                              <h2 className={styles.name}>{this.state.productObject.name}</h2>
+                              <div className={styles.attrs}>
                                 {
                                   this.state.productObject.attributes?.map(attr => {
                                     return (
-                                      <div className='attr-content' key={attr.id}>
-                                        <h5 className='attr__title'>{attr.name}:</h5>
-                                        <div className='attr__items'>
+                                      <div key={attr.id}>
+                                        <h5 className={styles.attrtitle}>{attr.name}:</h5>
+                                        <div className={styles.attritems}>
                                           {attr.items.map(value => {
                                             return (
                                               attr.type !== "swatch" ?
                                                 <span key={value.id}
                                                   onClick={() => { addAttrToProduct(attr.name, value.displayValue, this.state.productId) }}
-                                                  className={predictedProduct[`${attr.name}`] === value.displayValue ? "active attr__value" : "attr__value"}>
+                                                  className={predictedProduct[`${attr.name}`] === value.displayValue ? `${styles.attrvalue} ${styles.active}` : `${styles.attrvalue}`}>
                                                   {value.displayValue}
                                                 </span> :
                                                 <div key={value.id}
                                                   onClick={() => { addAttrToProduct(attr.name, value.displayValue, this.state.productId) }}
-                                                  className={predictedProduct[`${attr.name}`] === value.displayValue ? "active attr__value attr__value-color" : "attr__value attr__value-color"}
+                                                  className={predictedProduct[`${attr.name}`] === value.displayValue ? `${styles.attrvalue} ${styles.active} ${styles.attrvaluecolor}` : `${styles.attrvalue} ${styles.attrvaluecolor}`}
                                                   style={{ backgroundColor: `${value.displayValue}`, width: "36px", height: "36px" }}>
                                                 </div>
                                             )
@@ -107,15 +109,15 @@ class PDP extends Component {
                                     )
                                   })
                                 }
-                                <h5 className='attr__title'>PRICE:</h5>
-                                <h3 className='attr__price'>
+                                <h5 className={styles.attrtitle}>PRICE:</h5>
+                                <h3 className={styles.attrPrice}>
                                   {this.state.priceObject[0].currency.symbol}{this.state.priceObject[0].amount}
                                 </h3>
                                 <button
                                   onClick={addToCart}
                                   style={!this.state.productObject.inStock ? { pointerEvents: "none", backgroundColor: "#606e64" } : null}
-                                  className='add-to-cart'>{!this.state.productObject.inStock ? "Out Of Stock" : "ADD to Cart"}</button>
-                                <div className='description'>{parse(this.state.productObject.description)}</div>
+                                  className={styles.addToCart}>{!this.state.productObject.inStock ? "Out Of Stock" : "ADD to Cart"}</button>
+                                <div className={styles.description}>{parse(this.state.productObject.description)}</div>
                               </div>
                             </div>
                           </main>
